@@ -1,0 +1,205 @@
+<div class="contenedor">
+    <h4>Seleccione una opcion</h4>
+    <div class="contenedor__boton">
+        <button id="btnVista" (click)="this.cambiarVista('registro')">Registrar</button>
+        <button id="btnVista" (click)="this.cambiarVista('usuarios')">Usuarios</button>
+    </div>
+    <div class="wrapper fadeInDown" *ngIf="this.vista == 'registro'" class="contenedor__registro">
+        <img class="mt-5 pt-5 h-25 w-25" src="./assets/spinner.gif" alt="spinner" *ngIf="this.spinner == true">
+        <div id="formContent" *ngIf="this.spinner == false">
+            <h2 class="active"> Registro </h2>
+    
+            <!-- Icon -->
+            <div class="fadeIn first">
+                <img src="../../../../assets/registrar.png" id="icon" alt="User Icon" style="width: 40px;" />
+            </div>
+            <form [formGroup]="formAdmin" (ngSubmit)="this.registrar()">
+                <label for="nombreR">Nombre:</label>
+                <br>
+                <input type="text" id="nombreR" class="fadeIn second" name="registroNombre" placeholder="Ingrese nombre" formControlName="nombreR">
+                <br>
+                <small class="invalid" *ngIf="formAdmin.controls['nombreR'].errors?.['required'] && formAdmin.controls['nombreR'].touched">El nombre es requerido</small>
+                <small class="invalid" *ngIf="formAdmin.controls['nombreR'].errors?.['pattern'] && formAdmin.controls['nombreR'].touched">El nombre solo debe contener letras</small>
+                
+                <br>
+                <label for="apellidoR">Apellido:</label>
+                <br>
+                <input type="text" id="apellidoR" class="fadeIn second" name="registroApellido" placeholder="Ingrese apellido" formControlName="apellidoR">
+                <br>
+                <small class="invalid" *ngIf="formAdmin.controls['apellidoR'].errors?.['required'] && formAdmin.controls['apellidoR'].touched">El apellido es requerido</small>
+                <small class="invalid" *ngIf="formAdmin.controls['apellidoR'].errors?.['pattern'] && formAdmin.controls['apellidoR'].touched">El apellido solo debe contener letras</small>
+    
+                <br>
+                <label for="edadR">Edad:</label>
+                <br>
+                <input type="number" id="edadR" class="fadeIn second" name="registroEdad" placeholder="Ingrese edad" formControlName="edadR">
+                <br>
+                <small class="invalid" *ngIf="formAdmin.controls['edadR'].errors?.['required'] && formAdmin.controls['edadR'].touched">La edad es requerida</small>
+                <small class="invalid" *ngIf="formAdmin.controls['edadR'].errors?.['pattern'] && formAdmin.controls['edadR'].touched">La edad solo debe contener numeros</small>
+    
+                <br>
+                <label for="dniR">DNI:</label>
+                <br>
+                <input type="number" id="dniR" class="fadeIn second" name="registroDni" placeholder="Ingrese dni" formControlName="dniR">
+                <br>
+                <small class="invalid" *ngIf="formAdmin.controls['dniR'].errors?.['required'] && formAdmin.controls['dniR'].touched">El dni es requerido</small>
+                <small class="invalid" *ngIf="formAdmin.controls['dniR'].errors?.['pattern'] && formAdmin.controls['dniR'].touched">El dni solo debe contener numeros</small>
+                
+                <br>
+                <label for="emailR">Mail:</label>
+                <br>
+                <input type="text" id="emailR" class="fadeIn second" name="registroEmail" placeholder="Ingrese mail" formControlName="emailR">
+                <br>
+                <small class="invalid" *ngIf="formAdmin.controls['emailR'].errors?.['required'] && formAdmin.controls['emailR'].touched">El email es requerido</small>
+                <small class="invalid" *ngIf="formAdmin.controls['emailR'].errors?.['email'] && formAdmin.controls['emailR'].touched">El email debe tener el formato correspondiente</small>
+                <small class="invalid" *ngIf="formAdmin.controls['emailR'].errors?.['containsSpaces'] && formAdmin.controls['emailR'].touched">El email no puede contener espacios</small>
+    
+                <br>
+                <label for="claveR">Contraseña:</label>
+                <br>
+                <input type="password" id="claveR" class="fadeIn third" name="registroClave" placeholder="Ingrese contraseña" formControlName="claveR">
+                <br>
+                <small class="invalid" *ngIf="formAdmin.controls['claveR'].errors?.['required'] && formAdmin.controls['claveR'].touched">La clave es requerida</small>
+                <small class="invalid" *ngIf="formAdmin.controls['claveR'].errors?.['containsSpaces'] && formAdmin.controls['claveR'].touched">La clave no puede contener espacios</small>
+    
+                <br>
+                <label for="fotoR">Foto:</label>
+                <br>
+                <input type="file" id="fotoR" class="fadeIn second" name="registrofoto" placeholder="Ingrese foto" formControlName="fotoR">
+                <br>
+                <small class="invalid" *ngIf="formAdmin.controls['fotoR'].errors?.['required'] && formAdmin.controls['fotoR'].touched">La foto es requerida</small>
+                <small class="invalid" *ngIf="formAdmin.controls['fotoR'].errors?.['containsSpaces'] && formAdmin.controls['fotoR'].touched">La foto no puede contener espacios</small>
+            
+                <br><br>
+                <input type="submit" class="fadeIn fourth" value="Registrarse" [disabled]="formAdmin.invalid">
+            </form>      
+        </div>
+    </div>
+    <!-- <div *ngIf="this.vista == 'registro'" class="contenedor__registro">
+        <form [formGroup]="formAdmin" (ngSubmit)="this.registrar()">
+            <label for="nombreR">Nombre:</label>
+            <br>
+            <input type="text" id="nombreR" class="fadeIn second" name="registroNombre" placeholder="Ingrese nombre" formControlName="nombreR">
+            <small class="invalid" *ngIf="formAdmin.controls['nombreR'].errors?.['required'] && formAdmin.controls['nombreR'].touched">El nombre es requerido</small>
+            <small class="invalid" *ngIf="formAdmin.controls['nombreR'].errors?.['pattern'] && formAdmin.controls['nombreR'].touched">El nombre solo debe contener letras</small>
+            
+            <label for="apellidoR">Apellido:</label>
+            <br>
+            <input type="text" id="apellidoR" class="fadeIn second" name="registroApellido" placeholder="Ingrese apellido" formControlName="apellidoR">
+            <small class="invalid" *ngIf="formAdmin.controls['apellidoR'].errors?.['required'] && formAdmin.controls['apellidoR'].touched">El apellido es requerido</small>
+            <small class="invalid" *ngIf="formAdmin.controls['apellidoR'].errors?.['pattern'] && formAdmin.controls['apellidoR'].touched">El apellido solo debe contener letras</small>
+
+            <label for="edadR">Edad:</label>
+            <br>
+            <input type="number" id="edadR" class="fadeIn second" name="registroEdad" placeholder="Ingrese edad" formControlName="edadR">
+            <small class="invalid" *ngIf="formAdmin.controls['edadR'].errors?.['required'] && formAdmin.controls['edadR'].touched">La edad es requerida</small>
+            <small class="invalid" *ngIf="formAdmin.controls['edadR'].errors?.['pattern'] && formAdmin.controls['edadR'].touched">La edad solo debe contener numeros</small>
+
+            <label for="dniR">DNI:</label>
+            <br>
+            <input type="number" id="dniR" class="fadeIn second" name="registroDni" placeholder="Ingrese dni" formControlName="dniR">
+            <small class="invalid" *ngIf="formAdmin.controls['dniR'].errors?.['required'] && formAdmin.controls['dniR'].touched">El dni es requerido</small>
+            <small class="invalid" *ngIf="formAdmin.controls['dniR'].errors?.['pattern'] && formAdmin.controls['dniR'].touched">El dni solo debe contener numeros</small>
+            
+            <label for="emailR">Mail:</label>
+            <br>
+            <input type="text" id="emailR" class="fadeIn second" name="registroEmail" placeholder="Ingrese mail" formControlName="emailR">
+            <small class="invalid" *ngIf="formAdmin.controls['emailR'].errors?.['required'] && formAdmin.controls['emailR'].touched">El email es requerido</small>
+            <small class="invalid" *ngIf="formAdmin.controls['emailR'].errors?.['email'] && formAdmin.controls['emailR'].touched">El email debe tener el formato correspondiente</small>
+            <small class="invalid" *ngIf="formAdmin.controls['emailR'].errors?.['containsSpaces'] && formAdmin.controls['emailR'].touched">El email no puede contener espacios</small>
+
+            <label for="claveR">Contraseña:</label>
+            <br>
+            <input type="password" id="claveR" class="fadeIn third" name="registroClave" placeholder="Ingrese contraseña" formControlName="claveR">
+            <small class="invalid" *ngIf="formAdmin.controls['claveR'].errors?.['required'] && formAdmin.controls['claveR'].touched">La clave es requerida</small>
+            <small class="invalid" *ngIf="formAdmin.controls['claveR'].errors?.['containsSpaces'] && formAdmin.controls['claveR'].touched">La clave no puede contener espacios</small>
+
+            <label for="fotoR">Foto:</label>
+            <br>
+            <input type="file" id="fotoR" class="fadeIn second" name="registrofoto" placeholder="Ingrese foto" formControlName="fotoR">
+            <small class="invalid" *ngIf="formAdmin.controls['fotoR'].errors?.['required'] && formAdmin.controls['fotoR'].touched">La foto es requerida</small>
+            <small class="invalid" *ngIf="formAdmin.controls['fotoR'].errors?.['containsSpaces'] && formAdmin.controls['fotoR'].touched">La foto no puede contener espacios</small>
+        
+            <br><br>
+            <input type="submit" class="fadeIn fourth" value="Registrarse" [disabled]="formAdmin.invalid">
+        </form>
+    </div> -->
+    <div *ngIf="this.vista == 'usuarios'">
+        <p class="text-center">Seleccione el tipo de Usuario que quiere listar</p>
+        <div class="contenedor__boton">
+            <button (click)="this.cambiarListado('paciente')">Paciente</button>
+            <button (click)="this.cambiarListado('especialista')">Especialista</button>
+        </div>
+        <div>
+            <table class="table table-striped text-center" *ngIf="this.listado == 'paciente'">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Edad</th>
+                        <th>DNI</th>
+                        <th>Obra Social</th>
+                        <th>Mail</th>
+                        <th>Foto 1</th>
+                        <th>Foto 2</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let p of this.paci">
+                        <td>{{p.nombre}}</td>
+                        <td>{{p.apellido}}</td>
+                        <td>{{p.edad}}</td>
+                        <td>{{p.dni}}</td>
+                        <td>{{p.obraSocial}}</td>
+                        <td>{{p.mail}}</td>
+                        <td>{{p.foto}}</td>
+                        <td>{{p.foto2}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- <ul *ngIf="this.listado == 'paciente'">
+                <li *ngFor="let paci of this.paci">
+                    Nombre: {{paci.nombre}}
+                </li>
+            </ul> -->
+
+            <table class="table table-striped text-center" *ngIf="this.listado == 'especialista'">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Edad</th>
+                        <th>DNI</th>
+                        <th>Especialidad</th>
+                        <th>Mail</th>
+                        <th>Foto</th>
+                        <th>Accion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let e of this.esp">
+                        <td>{{e.nombre}}</td>
+                        <td>{{e.apellido}}</td>
+                        <td>{{e.edad}}</td>
+                        <td>{{e.dni}}</td>
+                        <td>{{e.especialidad}}</td>
+                        <td>{{e.mail}}</td>
+                        <td>{{e.foto}}</td>
+                        <td>
+                            <button *ngIf="e.activo" (click)="this.toggleActivo(e)">Inhabilitar</button>
+                            <button *ngIf="!e.activo" (click)="this.toggleActivo(e)">Habilitar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- <ul *ngIf="this.listado == 'especialista'">
+                <li *ngFor="let esp of this.esp">
+                    <p>Nombre: {{esp.nombre}}</p>
+                    <button *ngIf="esp.activo" (click)="this.toggleActivo(esp)">Inhabilitar</button>
+                    <button *ngIf="!esp.activo" (click)="this.toggleActivo(esp)">Habilitar</button>
+                </li>
+            </ul> -->
+        </div>
+    </div>
+</div>

@@ -1,0 +1,260 @@
+<!-- ORIGINAL  -->
+<div class="wrapper fadeInDown">
+    <img class="mt-5 pt-5 h-25 w-25" src="./assets/spinner.gif" alt="spinner" *ngIf="this.spinner == true">
+    <div id="formContent" *ngIf="this.spinner == false">
+        <h2 class="active"> Registro </h2>
+
+        <!-- Icon -->
+        <div class="fadeIn first">
+            <img src="../../../../assets/registrar.png" id="icon" alt="User Icon" style="width: 40px;" />
+        </div>
+        <br>
+        <button id="btnVista" (click)="cambiarVista('paciente')">Paciente</button>
+        <button id="btnVista" (click)="cambiarVista('especialista')">Especialista</button>
+        <!-- <button (click)="cambiarVista('admin')">Admin</button> -->
+
+        <div [ngSwitch]="this.vista">
+            <div *ngSwitchCase="'paciente'">
+                <form [formGroup]="formPaciente" (ngSubmit)="this.registrar()">
+                    <label for="nombreR">Nombre:</label>
+                    <br>
+                    <input type="text" id="nombreR" class="fadeIn second" name="registroNombre" placeholder="Ingrese nombre" formControlName="nombreR">
+                    <br>
+                    <small class="invalid" *ngIf="formPaciente.controls['nombreR'].errors?.['required'] && formPaciente.controls['nombreR'].touched">El nombre es requerido</small>
+                    <small class="invalid" *ngIf="formPaciente.controls['nombreR'].errors?.['pattern'] && formPaciente.controls['nombreR'].touched">El nombre solo debe contener letras</small>
+                    
+                    <br>
+                    <label for="apellidoR">Apellido:</label>
+                    <br>
+                    <input type="text" id="apellidoR" class="fadeIn second" name="registroApellido" placeholder="Ingrese apellido" formControlName="apellidoR">
+                    <br>
+                    <small class="invalid" *ngIf="formPaciente.controls['apellidoR'].errors?.['required'] && formPaciente.controls['apellidoR'].touched">El apellido es requerido</small>
+                    <small class="invalid" *ngIf="formPaciente.controls['apellidoR'].errors?.['pattern'] && formPaciente.controls['apellidoR'].touched">El apellido solo debe contener letras</small>
+
+                    <br>
+                    <label for="edadR">Edad:</label>
+                    <br>
+                    <input type="number" id="edadR" class="fadeIn second" name="registroEdad" placeholder="Ingrese edad" formControlName="edadR">
+                    <br>
+                    <small class="invalid" *ngIf="formPaciente.controls['edadR'].errors?.['required'] && formPaciente.controls['edadR'].touched">La edad es requerida</small>
+                    <small class="invalid" *ngIf="formPaciente.controls['edadR'].errors?.['pattern'] && formPaciente.controls['edadR'].touched">La edad solo debe contener numeros</small>
+
+                    <br>
+                    <label for="dniR">DNI:</label>
+                    <br>
+                    <input type="number" id="dniR" class="fadeIn second" name="registroDni" placeholder="Ingrese dni" formControlName="dniR">
+                    <br>
+                    <small class="invalid" *ngIf="formPaciente.controls['dniR'].errors?.['required'] && formPaciente.controls['dniR'].touched">El dni es requerido</small>
+                    <small class="invalid" *ngIf="formPaciente.controls['dniR'].errors?.['pattern'] && formPaciente.controls['dniR'].touched">El dni solo debe contener numeros</small>
+
+                    <br>
+                    <label for="obraSocialR">Obra Social:</label>
+                    <br>
+                    <input type="text" id="obraSocialR" class="fadeIn second" name="registroObraSocial" placeholder="Ingrese obra social" formControlName="obraSocialR">
+                    <br>
+                    <small class="invalid" *ngIf="formPaciente.controls['obraSocialR'].errors?.['required'] && formPaciente.controls['obraSocialR'].touched">La obra social es requerida</small>
+                    <small class="invalid" *ngIf="formPaciente.controls['obraSocialR'].errors?.['pattern'] && formPaciente.controls['obraSocialR'].touched">La obra social solo debe contener letras</small>
+                    
+                    <br>
+                    <label for="emailR">Mail:</label>
+                    <br>
+                    <input type="text" id="emailR" class="fadeIn second" name="registroEmail" placeholder="Ingrese mail" formControlName="emailR">
+                    <br>
+                    <small class="invalid" *ngIf="formPaciente.controls['emailR'].errors?.['required'] && formPaciente.controls['emailR'].touched">El email es requerido</small>
+                    <small class="invalid" *ngIf="formPaciente.controls['emailR'].errors?.['email'] && formPaciente.controls['emailR'].touched">El email debe tener el formato correspondiente</small>
+                    <small class="invalid" *ngIf="formPaciente.controls['emailR'].errors?.['containsSpaces'] && formPaciente.controls['emailR'].touched">El email no puede contener espacios</small>
+        
+                    <br>
+                    <label for="claveR">Contraseña:</label>
+                    <br>
+                    <input type="password" id="claveR" class="fadeIn third" name="registroClave" placeholder="Ingrese contraseña" formControlName="claveR">
+                    <br>
+                    <small class="invalid" *ngIf="formPaciente.controls['claveR'].errors?.['required'] && formPaciente.controls['claveR'].touched">La clave es requerida</small>
+                    <small class="invalid" *ngIf="formPaciente.controls['claveR'].errors?.['containsSpaces'] && formPaciente.controls['claveR'].touched">La clave no puede contener espacios</small>
+
+                    <br>
+                    <label for="fotoR">Foto:</label>
+                    <br>
+                    <input type="file" id="fotoR" class="fadeIn second" name="registrofoto" placeholder="Ingrese foto" formControlName="fotoR">
+                    <br>
+                    <small class="invalid" *ngIf="formPaciente.controls['fotoR'].errors?.['required'] && formPaciente.controls['fotoR'].touched">La foto es requerida</small>
+                    <small class="invalid" *ngIf="formPaciente.controls['fotoR'].errors?.['containsSpaces'] && formPaciente.controls['fotoR'].touched">La foto no puede contener espacios</small>
+
+                    <br>
+                    <label for="foto2R">Foto 2:</label>
+                    <br>
+                    <input type="file" id="foto2R" class="fadeIn second" name="registrofoto2" placeholder="Ingrese foto2" formControlName="foto2R">
+                    <br>
+                    <small class="invalid" *ngIf="formPaciente.controls['foto2R'].errors?.['required'] && formPaciente.controls['foto2R'].touched">La foto2 es requerida</small>
+                    <small class="invalid" *ngIf="formPaciente.controls['foto2R'].errors?.['containsSpaces'] && formPaciente.controls['foto2R'].touched">La foto2 no puede contener espacios</small>
+
+                    <br><br>
+                    <input type="submit" class="fadeIn fourth" value="Registrarse" [disabled]="formPaciente.invalid">
+                </form>        
+            </div>
+            <div *ngSwitchCase="'especialista'">
+                <!-- <form [formGroup]="formEspecialista" (ngSubmit)="this.registrar()"> -->
+                <form [formGroup]="formEspecialista">
+                    <label for="nombreR">Nombre:</label>
+                    <br>
+                    <input type="text" id="nombreR" class="fadeIn second" name="registroNombre" placeholder="Ingrese nombre" formControlName="nombreR">
+                    <br>
+                    <small class="invalid" *ngIf="formEspecialista.controls['nombreR'].errors?.['required'] && formEspecialista.controls['nombreR'].touched">El nombre es requerido</small>
+                    <small class="invalid" *ngIf="formEspecialista.controls['nombreR'].errors?.['pattern'] && formEspecialista.controls['nombreR'].touched">El nombre solo debe contener letras</small>
+                    
+                    <br>
+                    <label for="apellidoR">Apellido:</label>
+                    <br>
+                    <input type="text" id="apellidoR" class="fadeIn second" name="registroApellido" placeholder="Ingrese apellido" formControlName="apellidoR">
+                    <br>
+                    <small class="invalid" *ngIf="formEspecialista.controls['apellidoR'].errors?.['required'] && formEspecialista.controls['apellidoR'].touched">El apellido es requerido</small>
+                    <small class="invalid" *ngIf="formEspecialista.controls['apellidoR'].errors?.['pattern'] && formEspecialista.controls['apellidoR'].touched">El apellido solo debe contener letras</small>
+
+                    <br>
+                    <label for="edadR">Edad:</label>
+                    <br>
+                    <input type="number" id="edadR" class="fadeIn second" name="registroEdad" placeholder="Ingrese edad" formControlName="edadR">
+                    <br>
+                    <small class="invalid" *ngIf="formEspecialista.controls['edadR'].errors?.['required'] && formEspecialista.controls['edadR'].touched">La edad es requerida</small>
+                    <small class="invalid" *ngIf="formEspecialista.controls['edadR'].errors?.['pattern'] && formEspecialista.controls['edadR'].touched">La edad solo debe contener numeros</small>
+
+                    <br>
+                    <label for="dniR">DNI:</label>
+                    <br>
+                    <input type="number" id="dniR" class="fadeIn second" name="registroDni" placeholder="Ingrese dni" formControlName="dniR">
+                    <br>
+                    <small class="invalid" *ngIf="formEspecialista.controls['dniR'].errors?.['required'] && formEspecialista.controls['dniR'].touched">El dni es requerido</small>
+                    <small class="invalid" *ngIf="formEspecialista.controls['dniR'].errors?.['pattern'] && formEspecialista.controls['dniR'].touched">El dni solo debe contener numeros</small>
+
+                    <br>
+                    <label>Especialidad: <small>Seleccione de las ya existentes o ingrese una nueva</small></label>
+                    <br>
+                    <button *ngFor="let esp of this.especialidades" (click)="this.seleccion($event, esp.nombre)">{{esp.nombre}}</button>
+                    <input type="text" class="fadeIn second" name="registroespecialidad" formControlName="especialidadR" placeholder="Ingrese una nueva especialidad">
+                    <br>
+                    <small class="invalid" *ngIf="(formEspecialista.controls['especialidad[]'].errors?.['vacio'] && formEspecialista.controls['especialidad[]'].touched) || (formEspecialista.controls['especialidadR'].errors?.['vacio2'] && formEspecialista.controls['especialidadR'].touched)">Debe seleccionar una especialidad o ingresar una nueva >5</small>
+                    
+                    <br>
+                    <label for="emailR">Mail:</label>
+                    <br>
+                    <input type="text" id="emailR" class="fadeIn second" name="registroEmail" placeholder="Ingrese mail" formControlName="emailR">
+                    <br>
+                    <small class="invalid" *ngIf="formEspecialista.controls['emailR'].errors?.['required'] && formEspecialista.controls['emailR'].touched">El email es requerido</small>
+                    <small class="invalid" *ngIf="formEspecialista.controls['emailR'].errors?.['email'] && formEspecialista.controls['emailR'].touched">El email debe tener el formato correspondiente</small>
+                    <small class="invalid" *ngIf="formEspecialista.controls['emailR'].errors?.['containsSpaces'] && formEspecialista.controls['emailR'].touched">El email no puede contener espacios</small>
+        
+                    <br>
+                    <label for="claveR">Contraseña:</label>
+                    <br>
+                    <input type="password" id="claveR" class="fadeIn third" name="registroClave" placeholder="Ingrese contraseña" formControlName="claveR">
+                    <br>
+                    <small class="invalid" *ngIf="formEspecialista.controls['claveR'].errors?.['required'] && formEspecialista.controls['claveR'].touched">La clave es requerida</small>
+                    <small class="invalid" *ngIf="formEspecialista.controls['claveR'].errors?.['containsSpaces'] && formEspecialista.controls['claveR'].touched">La clave no puede contener espacios</small>
+
+                    <br>
+                    <label for="fotoR">Foto:</label>
+                    <br>
+                    <input type="file" id="fotoR" class="fadeIn second" name="registrofoto" placeholder="Ingrese foto" formControlName="fotoR">
+                    <br>
+                    <small class="invalid" *ngIf="formEspecialista.controls['fotoR'].errors?.['required'] && formEspecialista.controls['fotoR'].touched">La foto es requerida</small>
+                    <small class="invalid" *ngIf="formEspecialista.controls['fotoR'].errors?.['containsSpaces'] && formEspecialista.controls['fotoR'].touched">La foto no puede contener espacios</small>
+                
+                    <br><br>
+                    <!-- <input type="submit" class="fadeIn fourth" value="Registrarse" [disabled]="formEspecialista.invalid"> -->
+                    <input type="button" class="fadeIn fourth" value="Registrarse" [disabled]="formEspecialista.invalid" (click)="this.registrar()">
+                </form>
+            </div>
+            <!-- <div >
+                <form [formGroup]="formPrueba" (ngSubmit)="this.registrar()">           
+                    <label for="emailR">Mail:</label>
+                    <br>
+                    <input type="text" id="emailR" class="fadeIn second" name="registroEmail" placeholder="Ingrese mail" formControlName="emailR">
+                    <small class="invalid" *ngIf="formPrueba.controls['emailR'].errors?.['required'] && formPrueba.controls['emailR'].touched">El email es requerido</small>
+                    <small class="invalid" *ngIf="formPrueba.controls['emailR'].errors?.['email'] && formPrueba.controls['emailR'].touched">El email debe tener el formato correspondiente</small>
+                    <small class="invalid" *ngIf="formPrueba.controls['emailR'].errors?.['containsSpaces'] && formPrueba.controls['emailR'].touched">El email no puede contener espacios</small>
+        
+                    <label for="claveR">Contraseña:</label>
+                    <br>
+                    <input type="password" id="claveR" class="fadeIn third" name="registroClave" placeholder="Ingrese contraseña" formControlName="claveR">
+                    <small class="invalid" *ngIf="formPrueba.controls['claveR'].errors?.['required'] && formPrueba.controls['claveR'].touched">La clave es requerida</small>
+                    <small class="invalid" *ngIf="formPrueba.controls['claveR'].errors?.['containsSpaces'] && formPrueba.controls['claveR'].touched">La clave no puede contener espacios</small>
+
+                    <br>
+                    <input type="submit" class="fadeIn fourth" value="Regis" [disabled]="formPrueba.invalid">
+                    <br>
+                </form>        
+                <button class="fadeIn fourth" [disabled]="formPrueba.invalid" (click)="ingresar()">ingresar</button>
+                <button class="fadeIn fourth" (click)="salir()">salir</button>
+                <p *ngIf="this.usuario | async as user">{{user?.email}}</p>
+            </div> -->
+
+            <!-- <div *ngSwitchCase="'admin'">
+                <form [formGroup]="formAdmin" (ngSubmit)="this.registrar()">
+                    <label for="nombreR">Nombre:</label>
+                    <br>
+                    <input type="text" id="nombreR" class="fadeIn second" name="registroNombre" placeholder="Ingrese nombre" formControlName="nombreR">
+                    
+                    <label for="apellidoR">Apellido:</label>
+                    <br>
+                    <input type="text" id="apellidoR" class="fadeIn second" name="registroApellido" placeholder="Ingrese apellido" formControlName="apellidoR">
+
+                    <label for="edadR">Edad:</label>
+                    <br>
+                    <input type="number" id="edadR" class="fadeIn second" name="registroEdad" placeholder="Ingrese edad" formControlName="edadR">
+
+                    <label for="dniR">DNI:</label>
+                    <br>
+                    <input type="number" id="dniR" class="fadeIn second" name="registroDni" placeholder="Ingrese dni" formControlName="dniR">
+                    
+                    <label for="emailR">Mail:</label>
+                    <br>
+                    <input type="text" id="emailR" class="fadeIn second" name="registroEmail" placeholder="Ingrese mail" formControlName="emailR">
+                    <small class="invalid" *ngIf="formEspecialista.controls['emailR'].errors?.['required'] && formEspecialista.controls['emailR'].touched">El email es requerido</small>
+                    <small class="invalid" *ngIf="formEspecialista.controls['emailR'].errors?.['email'] && formEspecialista.controls['emailR'].touched">El email debe tener el formato correspondiente</small>
+                    <small class="invalid" *ngIf="formEspecialista.controls['emailR'].errors?.['containsSpaces'] && formEspecialista.controls['emailR'].touched">El email no puede contener espacios</small>
+        
+                    <label for="claveR">Contraseña:</label>
+                    <br>
+                    <input type="password" id="claveR" class="fadeIn third" name="registroClave" placeholder="Ingrese contraseña" formControlName="claveR">
+                    <small class="invalid" *ngIf="formEspecialista.controls['claveR'].errors?.['required'] && formEspecialista.controls['claveR'].touched">La clave es requerida</small>
+                    <small class="invalid" *ngIf="formEspecialista.controls['claveR'].errors?.['containsSpaces'] && formEspecialista.controls['claveR'].touched">La clave no puede contener espacios</small>
+
+                    <label for="fotoR">Foto:</label>
+                    <br>
+                    <input type="file" id="fotoR" class="fadeIn second" name="registrofoto" placeholder="Ingrese foto" formControlName="fotoR">
+                
+                    <br><br>
+                    <input type="submit" class="fadeIn fourth" value="Registrarse" [disabled]="formEspecialista.invalid">
+                </form>
+            </div> -->
+        </div>
+
+        <!-- Registro Form -->
+        <!-- <form [formGroup]="formRegistro" (ngSubmit)="this.registrar()">
+            <label for="emailR">Mail:</label>
+            <br>
+            <input type="text" id="emailR" class="fadeIn second" name="registroEmail" placeholder="Ingrese mail" formControlName="emailR">
+            <small class="invalid" *ngIf="formRegistro.controls['emailR'].errors?.['required'] && formRegistro.controls['emailR'].touched">El email es requerido</small>
+            <small class="invalid" *ngIf="formRegistro.controls['emailR'].errors?.['email'] && formRegistro.controls['emailR'].touched">El email debe tener el formato correspondiente</small>
+            <small class="invalid" *ngIf="formRegistro.controls['emailR'].errors?.['containsSpaces'] && formRegistro.controls['emailR'].touched">El email no puede contener espacios</small>
+
+            <label for="claveR">Contraseña:</label>
+            <br>
+            <input type="password" id="claveR" class="fadeIn third" name="registroClave" placeholder="Ingrese contraseña" formControlName="claveR">
+            <small class="invalid" *ngIf="formRegistro.controls['claveR'].errors?.['required'] && formRegistro.controls['claveR'].touched">La clave es requerida</small>
+            <small class="invalid" *ngIf="formRegistro.controls['claveR'].errors?.['containsSpaces'] && formRegistro.controls['claveR'].touched">La clave no puede contener espacios</small>
+
+            <br>
+            <label for="perfilR">Perfil: </label>
+            <br>
+            <select id="perfilR" formControlName="perfilR">
+                <option value="">Seleccione uno</option>
+                <option value="admin">Admin</option>
+                <option value="empleado">Empleado</option>
+            </select>
+            <small class="invalid" *ngIf="formRegistro.controls['perfilR'].errors?.['required'] && formRegistro.controls['perfilR'].touched">El perfil es requerido</small>
+            <br><br>
+            <input type="submit" class="fadeIn fourth" value="Ingresar" [disabled]="formRegistro.invalid">
+        </form> -->
+    </div>
+</div>

@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "clinicaonline-torrez": {
+      "hosting": {
+        "TP_Clinica": [
+          "clinicaonline-torrez"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "clinicaonline-torrez"
+  }
+}

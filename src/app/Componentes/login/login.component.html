@@ -1,0 +1,38 @@
+<div class="wrapper fadeInDown">
+    <img class="mt-5 pt-5 h-25 w-25" src="./assets/spinner.gif" alt="spinner" *ngIf="this.spinner == true">
+    <div id="formContent" *ngIf="this.spinner == false">
+      <h2 class="active"> Ingreso </h2>
+  
+      <!-- Icon -->
+      <div class="fadeIn first">
+        <img src="./assets/login.png" id="icon" alt="User Icon" style="width: 30px;" /> 
+      </div>
+  
+      <!-- Login Form -->
+      <form [formGroup]="formLogin" (ngSubmit)="this.ingresar()">
+                    <label for="emailR">Mail:</label>
+                    <br>
+                    <input type="text" id="emailR" class="fadeIn second" name="registroEmail" placeholder="Ingrese mail" formControlName="emailR">
+                    <br>
+                    <small class="invalid" *ngIf="formLogin.controls['emailR'].errors?.['required'] && formLogin.controls['emailR'].touched">El email es requerido</small>
+                    <small class="invalid" *ngIf="formLogin.controls['emailR'].errors?.['email'] && formLogin.controls['emailR'].touched">El email debe tener el formato correspondiente</small>
+                    <small class="invalid" *ngIf="formLogin.controls['emailR'].errors?.['containsSpaces'] && formLogin.controls['emailR'].touched">El email no puede contener espacios</small>
+        
+                    <br>
+                    <label for="claveR">Contraseña:</label>
+                    <br>
+                    <input type="password" id="claveR" class="fadeIn third" name="registroClave" placeholder="Ingrese contraseña" formControlName="claveR">
+                    <br>
+                    <small class="invalid" *ngIf="formLogin.controls['claveR'].errors?.['required'] && formLogin.controls['claveR'].touched">La clave es requerida</small>
+                    <small class="invalid" *ngIf="formLogin.controls['claveR'].errors?.['containsSpaces'] && formLogin.controls['claveR'].touched">La clave no puede contener espacios</small>
+
+                    <br><br>
+                    <input type="submit" class="fadeIn fourth" value="Ingresar" [disabled]="formLogin.invalid">
+      </form>
+      <div class="row justify-content-center mb-2">
+        <button class="fadeIn fourth p-2 col-2" (click)="this.llenar('Leo@gmail.com', 'chau1234')">Admin</button>
+        <button class="fadeIn fourth p-2 col-3" (click)="this.llenar('Ailen@gmail.com','hola1234')">Especialista</button>
+        <button class="fadeIn fourth p-2 col-2" (click)="this.llenar('Pepe@gmail.com','hola1234')">Paciente</button>
+      </div>
+    </div>
+</div>
