@@ -27,18 +27,20 @@ export class BaseDatosService {
     //       ) 
     //     }
     //   }
-    // );
+    // ); 
 
     try {
-      res = (await this.ngFsAu.createUserWithEmailAndPassword(mail, clave));
-      (await this.ngFsAu.currentUser)?.sendEmailVerification().then(
-        async ()=>{
-          // console.log("Enviee la verificacion");
-          // await this.logout();
-          // if(mail2 != ""){
-          //   this.login(mail2,clave2);
-          // }
-      });
+      // res = (await this.ngFsAu.createUserWithEmailAndPassword(mail, clave));
+      // (await this.ngFsAu.currentUser)?.sendEmailVerification().then(
+      //   async ()=>{
+      //     // console.log("Enviee la verificacion");
+      //     // await this.logout();
+      //     // if(mail2 != ""){
+      //     //   this.login(mail2,clave2);
+      //     // }
+      // });
+      res = await this.ngFsAu.createUserWithEmailAndPassword(mail, clave);
+      await (await this.ngFsAu.currentUser)?.sendEmailVerification();
     } catch (error:any) {
       throw error.message;      
     }
@@ -60,6 +62,7 @@ export class BaseDatosService {
   async logout(){
      try {
       await this.ngFsAu.signOut();
+      return;
       // console.log("entre al logout");
      } catch (error) {
       console.log(error);

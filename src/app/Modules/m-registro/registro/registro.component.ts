@@ -220,10 +220,95 @@ export class RegistroComponent {
     this.vista = perfil;
   }
 
+  // async registrar()
+  // {
+  //   this.spinner = true;
+  //   // console.log("Entre al registrar");
+  //   let mail:string;
+  //   let clave:string;
+
+  //   if(this.vista == "especialista")
+  //   {
+  //       this.miEspecialista.nombre = this.formEspecialista.value.nombreR;
+  //       this.miEspecialista.apellido = this.formEspecialista.value.apellidoR;
+  //       this.miEspecialista.edad = this.formEspecialista.value.edadR;
+  //       this.miEspecialista.dni = this.formEspecialista.value.dniR;
+  //       this.miEspecialista.mail = this.formEspecialista.value.emailR.toLocaleLowerCase();
+  //       mail = this.miEspecialista.mail;
+  //       this.miEspecialista.clave = this.formEspecialista.value.claveR;
+  //       clave = this.formEspecialista.value.claveR;
+  //       //FALTA FOTO EN FIREBASE
+  //       this.miEspecialista.foto = this.formEspecialista.value.fotoR;
+  //       this.miEspecialista.perfil = "especialista";
+  //       let array = (<FormArray>this.formEspecialista.get('especialidad[]')).controls;
+  //       if(array.length != 0){
+  //         array.forEach(
+  //           (a)=>{
+  //             this.miEspecialista.especialidad.push(a.value);
+  //           });
+  //       }
+  //       if(this.formEspecialista.value.especialidadR != ""){
+
+  //         this.miEspecialista.especialidad.push(this.formEspecialista.value.especialidadR);
+  //       }
+        
+  //   }
+  //   else
+  //   {
+  //       this.miPaciente.nombre = this.formPaciente.value.nombreR;
+  //       this.miPaciente.apellido = this.formPaciente.value.apellidoR;
+  //       this.miPaciente.edad = this.formPaciente.value.edadR;
+  //       this.miPaciente.dni = this.formPaciente.value.dniR;
+  //       this.miPaciente.mail = this.formPaciente.value.emailR.toLocaleLowerCase();
+  //       mail = this.miPaciente.mail;
+  //       this.miPaciente.clave = this.formPaciente.value.claveR;
+  //       clave = this.formPaciente.value.claveR;
+  //       this.miPaciente.perfil = "paciente";
+  //       this.miPaciente.obraSocial = this.formPaciente.value.obraSocialR;
+  //       //FALTA FOTO EN FIREBASE
+  //       this.miPaciente.foto = this.formPaciente.value.fotoR;
+  //       this.miPaciente.foto2 = this.formPaciente.value.foto2R;
+  //   }
+  //     await this.servBase.register(mail, clave).then(
+  //     ()=>{
+  //         // await this.servBase.logout();
+  //           if(this.vista == "especialista")
+  //           {
+  //           // this.servBase.guardarObjetoSinID(this.miEspecialista, "Usuarios");
+  //             this.servBase.guardarObjeto(this.miEspecialista, "Usuarios");
+  //           }
+  //           else
+  //           {
+  //           // this.servBase.guardarObjetoSinID(this.miPaciente, "Usuarios");
+  //             this.servBase.guardarObjeto(this.miPaciente, "Usuarios");
+  //           } 
+  //           Swal.fire(
+  //             'El usuario ha sido registrado con exito!',
+  //             'Haga click para continuar',
+  //             'success'
+  //           );
+  //       }
+  //     ).catch(
+  //       (error)=>{
+  //         Swal.fire(
+  //           'error: ' + error,
+  //           'Haga click para continuar',
+  //           'error'
+  //         );
+  //       }
+  //     );
+  //     setTimeout(() => {
+  //       this.servBase.logout();
+  //       this.spinner = false;
+  //       this.router.navigateByUrl('home');
+  //     }, 1500);
+  //     // this.spinner = false;
+  //     // this.router.navigateByUrl('home');
+  // }
+
   async registrar()
   {
     this.spinner = true;
-    // console.log("Entre al registrar");
     let mail:string;
     let clave:string;
 
@@ -269,41 +354,36 @@ export class RegistroComponent {
         this.miPaciente.foto = this.formPaciente.value.fotoR;
         this.miPaciente.foto2 = this.formPaciente.value.foto2R;
     }
-      await this.servBase.register(mail, clave).then(
-      ()=>{
-          // await this.servBase.logout();
-            if(this.vista == "especialista")
-            {
+
+    this.servBase.register(mail, clave)
+    .then(
+      async ()=>{
+        await this.servBase.logout();
+        if(this.vista == "especialista")
+        {
             // this.servBase.guardarObjetoSinID(this.miEspecialista, "Usuarios");
               this.servBase.guardarObjeto(this.miEspecialista, "Usuarios");
-            }
-            else
-            {
-            // this.servBase.guardarObjetoSinID(this.miPaciente, "Usuarios");
-              this.servBase.guardarObjeto(this.miPaciente, "Usuarios");
-            } 
-            Swal.fire(
-              'El usuario ha sido registrado con exito!',
-              'Haga click para continuar',
-              'success'
-            );
         }
-      ).catch(
-        (error)=>{
-          Swal.fire(
-            'error: ' + error,
-            'Haga click para continuar',
-            'error'
-          );
-        }
-      );
-      setTimeout(() => {
-        this.servBase.logout();
-        this.spinner = false;
+        else
+        {
+        // this.servBase.guardarObjetoSinID(this.miPaciente, "Usuarios");
+          this.servBase.guardarObjeto(this.miPaciente, "Usuarios");
+        } 
+        Swal.fire(
+          'El usuario ha sido registrado con exito!',
+          'Haga click para continuar',
+          'success'
+        );
         this.router.navigateByUrl('home');
-      }, 1500);
-      // this.spinner = false;
-      // this.router.navigateByUrl('home');
+    }).catch(
+      (error)=>{
+        Swal.fire(
+          'error: ' + error,
+          'Haga click para continuar',
+          'error'
+        );
+      }
+    );
   }
 
   async ingresar(){

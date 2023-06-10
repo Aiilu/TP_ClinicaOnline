@@ -1,0 +1,9 @@
+.contenedor{
+    margin-top: 1em;
+    background-color: aqua;
+}
+
+.contenedor__imagen{
+    width: 10em;
+    height: 10em;
+}

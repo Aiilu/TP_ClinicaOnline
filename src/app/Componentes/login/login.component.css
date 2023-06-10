@@ -259,6 +259,15 @@ input[type=text]:placeholder {
 
 button{
   margin-right: 1em;
-  border-radius: .4em;
+  /* border-radius: .4em; */
+  width: 6em;
+  height: 6em;
+  border-radius: 50%;
   background-color: #51e0d2;
+}
+
+.bori{
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }

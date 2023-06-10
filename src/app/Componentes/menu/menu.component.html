@@ -6,6 +6,9 @@
                 <p class="text-white">{{(this.usuario | async)?.mail}}</p>
             </li> -->
             <!-- <li class="list-inline-item p-3" *ngIf="!this.usu?.email"> -->
+            <li class="list-inline-item p-3" *ngIf="this.usu?.mail">
+                <p class="text-white">{{this.usu?.mail}}</p>
+            </li>
             <li class="list-inline-item p-3" *ngIf="!this.usu?.mail">
                 <a class="text-white" routerLink="login">Ingresar</a>
             </li>
@@ -15,13 +18,13 @@
             <li class="list-inline-item p-3" *ngIf="this.usu?.perfil == 'administrador'">
                 <a class="text-white" routerLink="usuarios">Usuarios</a>
             </li>
-            <li class="list-inline-item p-3">
+            <li class="list-inline-item p-3" *ngIf="this.usu?.mail">
                 <a class="text-white" routerLink="misTurnos">Mis Turnos</a>
             </li>
             <li class="list-inline-item p-3" *ngIf="this.usu?.mail">
                 <a class="text-white" routerLink="perfil">Perfil</a>
             </li>
-            <li class="list-inline-item p-3">
+            <li class="list-inline-item p-3" *ngIf="(this.usu?.perfil == 'administrador') || (this.usu?.perfil == 'paciente')">
                 <a class="text-white" routerLink="solTur">Solicitar Turnos</a>
             </li>
             <li class="list-inline-item p-3">

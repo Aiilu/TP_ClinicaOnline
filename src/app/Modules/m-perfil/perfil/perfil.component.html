@@ -1,0 +1,54 @@
+<!-- Foto de un lado y al costado cada uno de sus datos -->
+<div class="contenedor">
+    <img class="contenedor__imagen" src="https://cdn-icons-png.flaticon.com/512/1077/1077063.png" alt="Img Perfil">
+
+    <button *ngIf="usu.perfil == 'paciente'">Cambiar Imagen</button>
+
+    <p>Nombre: {{usu.nombre}}</p>
+    <p>Apellido: {{usu.apellido}}</p>
+    <p>Edad: {{usu.edad}}</p>
+    <p>DNI: {{usu.dni}}</p>
+
+    <div [ngSwitch]="usu.perfil">
+        <div *ngSwitchCase="'paciente'">
+            <p>Obra Social: {{usu.obraSocial}}</p>
+        </div>
+        <div *ngSwitchCase="'especialista'">
+            <p>Especialidad: {{usu.especialidad}}</p>
+
+            <!-- Lunes a Viernes son 11 horas, 5 horas una seccion y 6 horas otra. Sabados son 6 horas, 3 horas cada seccion. -->
+            <!-- De esta manera tambien podemos hacer que un label este asociado al input -->
+            <button>Mis horarios</button><br>
+
+            <!-- <button>Especialidades</button> -->
+            <button>Lunes</button>
+            <button>Martes</button>
+            <button>Miercoles</button>
+            <button>Jueves</button>
+            <button>Viernes</button>
+            <!-- <label>Dia de Semana</label><br>
+            <input type="checkbox" name="semana" value="Lunes">Lunes<br>
+            <input type="checkbox" name="semana" value="Martes">Martes<br>
+            <input type="checkbox" name="semana" value="Miercoles">Miercoles<br>
+            <input type="checkbox" name="semana" value="Jueves">Jueves<br>
+            <input type="checkbox" name="semana" value="Viernes">Viernes<br> -->
+
+            <br>
+            <p>El turno mañana va de las 08 a 13 - turno tarde va de las 13 a las 19</p>
+            <button>Turno Mañana</button>
+            <button>Turno Tarde</button>
+            <br>
+
+            <button>Sabado</button>
+            <p>El turno mañana va de las 08 a 11 - turno tarde va de las 11 a las 14</p>
+            <button>Turno Mañana</button>
+            <button>Turno Tarde</button>
+            <!-- <button>Fin de semana</button> -->
+            <!-- <label>Fin de semana</label><br>
+            <input type="checkbox" name="finde" value="Sabado">Sabado<br>
+            <p>El turno mañana va de las 08 a 11 - turno tarde va de las 11 a las 14</p>
+            <button>Turno Mañana</button>
+            <button>Turno Tarde</button> -->
+        </div>
+    </div>
+</div>

@@ -91,19 +91,84 @@ export class UsuariosComponent {
     this.servBase.modificarObjeto(esp,'Usuarios');
   }
 
+  // async registrar()
+  // {
+  //   // console.log("Entro a registrar");
+  //   let mail2 = "";
+  //   let clave2 = "";
+  //   let sus = this.servBase.getUser().subscribe(
+  //     async (a:any)=>{
+  //         // console.log("estoy en el getUser");
+  //         await this.servBase.traerUsu('Usuarios', a?.email).then(
+  //           (b:any[])=>{
+  //             mail2 = b[0].mail;
+  //             clave2 = b[0].clave;
+  //             // console.log("suscribe de la coleccion: " + mail2 + "" + clave2);
+  //           }
+  //           );
+  //         sus.unsubscribe();
+  //     }
+  //   )
+
+  //   this.spinner = true;
+  //   let mail:string;
+  //   let clave:string;
+
+  //   this.miAdmin.nombre = this.formAdmin.value.nombreR;
+  //   this.miAdmin.apellido = this.formAdmin.value.apellidoR;
+  //   this.miAdmin.edad = this.formAdmin.value.edadR;
+  //   this.miAdmin.dni = this.formAdmin.value.dniR;
+  //   this.miAdmin.mail = this.formAdmin.value.emailR.toLocaleLowerCase();
+  //   mail = this.miAdmin.mail;
+  //   this.miAdmin.clave = this.formAdmin.value.claveR;
+  //   clave = this.formAdmin.value.claveR;
+  //   this.miAdmin.perfil = "administrador";
+  //   //FALTA FOTO EN FIREBASE
+  //   this.miAdmin.foto = this.formAdmin.value.fotoR;
+
+  //   await this.servBase.register(mail, clave).then(
+  //     ()=>{
+  //           // console.log("then del registrar, ahora tengo que grabar la coleccion");
+  //           // await this.servBase.logout();
+  //           this.servBase.guardarObjeto(this.miAdmin, "Usuarios");
+  //           Swal.fire(
+  //             'El usuario ha sido registrado con exito!',
+  //             'Haga click para continuar',
+  //             'success'
+  //           );
+  //         }
+  //     ).catch(
+  //       (error)=>{
+  //         Swal.fire(
+  //           'error: ' + error,
+  //           'Haga click para continuar',
+  //           'error'
+  //         );
+  //       }
+  //     );
+
+  //     setTimeout(async() => {
+  //       // console.log("dentro del setTimeOut");
+  //       await this.servBase.logout();
+  //       // console.log("voy a loguearme");
+  //       this.servBase.login(mail2,clave2);
+  //       this.spinner = false;
+  //       this.router.navigateByUrl('home');
+  //     }, 1500);
+  //   // this.spinner = false;
+  //   // await this.router.navigateByUrl('home');
+  // }
+
   async registrar()
   {
-    // console.log("Entro a registrar");
     let mail2 = "";
     let clave2 = "";
     let sus = this.servBase.getUser().subscribe(
       async (a:any)=>{
-          // console.log("estoy en el getUser");
           await this.servBase.traerUsu('Usuarios', a?.email).then(
             (b:any[])=>{
               mail2 = b[0].mail;
               clave2 = b[0].clave;
-              // console.log("suscribe de la coleccion: " + mail2 + "" + clave2);
             }
             );
           sus.unsubscribe();
@@ -127,15 +192,18 @@ export class UsuariosComponent {
     this.miAdmin.foto = this.formAdmin.value.fotoR;
 
     await this.servBase.register(mail, clave).then(
-      ()=>{
+    async  ()=>{
             // console.log("then del registrar, ahora tengo que grabar la coleccion");
-            // await this.servBase.logout();
-            this.servBase.guardarObjeto(this.miAdmin, "Usuarios");
+            await this.servBase.logout();
             Swal.fire(
               'El usuario ha sido registrado con exito!',
               'Haga click para continuar',
               'success'
             );
+            await this.servBase.login(mail2,clave2);
+            this.servBase.guardarObjeto(this.miAdmin, "Usuarios");
+            this.spinner = false;
+            this.router.navigateByUrl('home');
           }
       ).catch(
         (error)=>{
@@ -147,14 +215,14 @@ export class UsuariosComponent {
         }
       );
 
-      setTimeout(async() => {
-        // console.log("dentro del setTimeOut");
-        await this.servBase.logout();
-        // console.log("voy a loguearme");
-        this.servBase.login(mail2,clave2);
-        this.spinner = false;
-        this.router.navigateByUrl('home');
-      }, 1500);
+      // setTimeout(async() => {
+      //   // console.log("dentro del setTimeOut");
+      //   await this.servBase.logout();
+      //   // console.log("voy a loguearme");
+      //   this.servBase.login(mail2,clave2);
+      //   this.spinner = false;
+      //   this.router.navigateByUrl('home');
+      // }, 1500);
     // this.spinner = false;
     // await this.router.navigateByUrl('home');
   }
