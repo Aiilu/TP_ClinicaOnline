@@ -14,6 +14,7 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { provideStorage,getStorage } from '@angular/fire/storage';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),
     AngularFireAuthModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    provideStorage(() => getStorage())
   ],
   providers: [{ provide: FIREBASE_OPTIONS, useValue: environment.firebase }],
   bootstrap: [AppComponent]

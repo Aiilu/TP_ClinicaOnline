@@ -1,0 +1,22 @@
+<!-- Entre 2 y 6 click. 10 ya son muchos.
+En base a la especialidad, traes al medico, y en base al medico, traes su horario.
+Tambien son botones, con foto y nombre en las especialidades. 
+
+Se debera seleccionar Especialidad, Especialista, Dia y Horario del turno 
+El usuario guarda sus turnos, el especialista guarda sus turnos y hay un TURNOS general
+-->
+<div class="contenedor">
+    <button *ngFor="let esp of this.especialidades" (click)="this.seleccionEsp(esp.nombre)">{{esp.nombre}}</button>
+
+    <div *ngIf="this.listaEspSelec.length != 0">
+        <button *ngFor="let esp of this.listaEspSelec" (click)="this.seleccionEsp2(esp.mail)">{{esp.nombre}}<img class="imagen" [src]="esp.foto" alt="Img Esp"></button>
+    </div>
+
+    <div *ngIf="this.listaDias.length !=0">
+        <button *ngFor="let dia of this.listaDias" (click)="this.selDia(dia.horario)">{{dia.horario.dia}}: {{dia.nro}}</button>
+    </div>
+
+    <div *ngIf="this.listaTurnos.length !=0">
+        <button *ngFor="let turno of this.listaTurnos">{{turno}}</button>
+    </div>
+</div>

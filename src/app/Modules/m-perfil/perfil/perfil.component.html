@@ -1,54 +1,68 @@
-<!-- Foto de un lado y al costado cada uno de sus datos -->
-<div class="contenedor">
-    <img class="contenedor__imagen" src="https://cdn-icons-png.flaticon.com/512/1077/1077063.png" alt="Img Perfil">
+<img class="mt-5 pt-5 h-25 w-25" src="./assets/spinner.gif" alt="spinner" *ngIf="this.spinner == true">
+<div class="contenedor" *ngIf="this.spinner == false">
+    <div class="contenedor__perfil">
+        <img class="perfil__imagen" [src]="this.usu?.foto" alt="Img Perfil">
+        <p>Nombre: {{this.usu?.nombre}}</p>
+        <p>Apellido: {{this.usu?.apellido}}</p>
+        <p>Edad: {{this.usu?.edad}}</p>
+        <p>DNI: {{this.usu?.dni}}</p>
 
-    <button *ngIf="usu.perfil == 'paciente'">Cambiar Imagen</button>
-
-    <p>Nombre: {{usu.nombre}}</p>
-    <p>Apellido: {{usu.apellido}}</p>
-    <p>Edad: {{usu.edad}}</p>
-    <p>DNI: {{usu.dni}}</p>
-
-    <div [ngSwitch]="usu.perfil">
-        <div *ngSwitchCase="'paciente'">
-            <p>Obra Social: {{usu.obraSocial}}</p>
-        </div>
-        <div *ngSwitchCase="'especialista'">
-            <p>Especialidad: {{usu.especialidad}}</p>
-
-            <!-- Lunes a Viernes son 11 horas, 5 horas una seccion y 6 horas otra. Sabados son 6 horas, 3 horas cada seccion. -->
-            <!-- De esta manera tambien podemos hacer que un label este asociado al input -->
-            <button>Mis horarios</button><br>
-
-            <!-- <button>Especialidades</button> -->
-            <button>Lunes</button>
-            <button>Martes</button>
-            <button>Miercoles</button>
-            <button>Jueves</button>
-            <button>Viernes</button>
-            <!-- <label>Dia de Semana</label><br>
-            <input type="checkbox" name="semana" value="Lunes">Lunes<br>
-            <input type="checkbox" name="semana" value="Martes">Martes<br>
-            <input type="checkbox" name="semana" value="Miercoles">Miercoles<br>
-            <input type="checkbox" name="semana" value="Jueves">Jueves<br>
-            <input type="checkbox" name="semana" value="Viernes">Viernes<br> -->
-
-            <br>
-            <p>El turno mañana va de las 08 a 13 - turno tarde va de las 13 a las 19</p>
-            <button>Turno Mañana</button>
-            <button>Turno Tarde</button>
-            <br>
-
-            <button>Sabado</button>
-            <p>El turno mañana va de las 08 a 11 - turno tarde va de las 11 a las 14</p>
-            <button>Turno Mañana</button>
-            <button>Turno Tarde</button>
-            <!-- <button>Fin de semana</button> -->
-            <!-- <label>Fin de semana</label><br>
-            <input type="checkbox" name="finde" value="Sabado">Sabado<br>
-            <p>El turno mañana va de las 08 a 11 - turno tarde va de las 11 a las 14</p>
-            <button>Turno Mañana</button>
-            <button>Turno Tarde</button> -->
+        <div [ngSwitch]="this.usu?.perfil">
+            <div *ngSwitchCase="'paciente'">
+                <p>Obra Social: {{this.usu?.obraSocial}}</p>
+            </div>
+            <div *ngSwitchCase="'especialista'">
+                <p>Especialidad: {{this.usu?.especialidad}}</p>
+            </div>
         </div>
     </div>
+
+    <div class="contenedor__horarios">
+
+        <button *ngIf="this.usu?.perfil == 'especialista'" (click)="this.mostrarHorarios()">Mis horarios</button><br><br>
+
+        <div *ngIf="this.horarios">
+            <button *ngFor="let esp of this.usu?.especialidad" (click)="this.seleccionEsp(esp, $event)">{{esp}}</button>
+        
+            <div *ngIf="this.especialidadSeleccionada != ''">
+                <label>Lunes: </label><button
+                    (click)="this.validarHorario($event, 'primero', 'Lunes', this.especialidadSeleccionada)">08:00 a
+                    13:00</button><button
+                    (click)="this.validarHorario($event, 'segundo', 'Lunes', this.especialidadSeleccionada)">13:00 a
+                    19:00</button>
+                <br><br>
+                <label>Martes: </label><button
+                    (click)="this.validarHorario($event, 'primero', 'Martes', this.especialidadSeleccionada)">08:00 a
+                    13:00</button><button
+                    (click)="this.validarHorario($event, 'segundo', 'Martes', this.especialidadSeleccionada)">13:00 a
+                    19:00</button>
+                <br><br>
+                <label>Miercoles: </label><button
+                    (click)="this.validarHorario($event, 'primero', 'Miercoles', this.especialidadSeleccionada)">08:00 a
+                    13:00</button><button
+                    (click)="this.validarHorario($event, 'segundo', 'Miercoles', this.especialidadSeleccionada)">13:00 a
+                    19:00</button>
+                <br><br>
+                <label>Jueves: </label><button
+                    (click)="this.validarHorario($event, 'primero', 'Jueves', this.especialidadSeleccionada)">08:00 a
+                    13:00</button><button
+                    (click)="this.validarHorario($event, 'segundo', 'Jueves', this.especialidadSeleccionada)">13:00 a
+                    19:00</button>
+                <br><br>
+                <label>Viernes: </label><button
+                    (click)="this.validarHorario($event, 'primero', 'Viernes', this.especialidadSeleccionada)">08:00 a
+                    13:00</button><button
+                    (click)="this.validarHorario($event, 'segundo', 'Viernes', this.especialidadSeleccionada)">13:00 a
+                    19:00</button>
+                <br><br>
+                <label>Sabado: </label><button
+                    (click)="this.validarHorario($event, 'primero', 'Sabado', this.especialidadSeleccionada)">08:00 a
+                    11:00</button><button
+                    (click)="this.validarHorario($event, 'segundo', 'Sabado', this.especialidadSeleccionada)">11:00 a
+                    14:00</button>
+            </div>
+            <button *ngIf="this.arrayDias.length != 0" (click)="this.guardar()">Guardar</button>
+        </div>
+        {{this.arrayDias | json}}
+        </div>
 </div>

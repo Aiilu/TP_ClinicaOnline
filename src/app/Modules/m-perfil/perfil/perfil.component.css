@@ -3,7 +3,19 @@
     background-color: aqua;
 }
 
-.contenedor__imagen{
+.perfil__imagen{
     width: 10em;
     height: 10em;
+}
+
+.contenedor__horarios{
+    background-color: blueviolet;
+}
+
+.rojo{
+    background-color: red;
+}
+
+.verde{
+    background-color: green;
 }

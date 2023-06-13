@@ -271,3 +271,11 @@ button{
   margin-right: 1em;
   border-radius: .4em;
 }
+
+.captcha{
+  margin-left: 5em;
+}
+
+[disabled]{
+  background-color: gray !important;
+}

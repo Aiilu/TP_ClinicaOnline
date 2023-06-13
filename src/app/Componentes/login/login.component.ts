@@ -14,9 +14,6 @@ export class LoginComponent {
   miUsuario:any = {};
   formLogin: FormGroup;
   spinner:boolean = false;
-  
-  // miUsuario = new Usuario("", "", "");
-  // sub:Subscription = Subscription.EMPTY;
 
   constructor(private fb: FormBuilder, private servBase:BaseDatosService, private router:Router) {
     this.formLogin = this.fb.group({
@@ -39,36 +36,6 @@ export class LoginComponent {
     }
   }
 
-  // ngOnInit(){
-  //   this.sub = this.servBase.traer("Usuarios");
-  // }
-  
-  // ngOnDestroy(){
-  //   this.sub.unsubscribe();
-  // }
-
-  // ingresar(){
-  //   if(this.servUsuario.validarUsuario(this.servBase.array, this.miUsuario, "T")){
-  //     Swal.fire(
-  //       'Ingreso correctamente!',
-  //       'Haga click para continuar',
-  //       'success'
-  //     );
-  //     // this.servUsuario.activo = this.miUsuario;
-  //     let fechaHora:string = (((new Date).toLocaleDateString()) + " " + ((new Date).toLocaleTimeString()));
-  //     this.miUsuario.perfil = this.servUsuario.tipoPerfil;
-  //     this.servUsuario.setActivo = this.miUsuario;
-  //     this.servBase.guardar("Log", {usuario:{mail:this.miUsuario.mail, clave:this.miUsuario.clave, perfil:this.miUsuario.perfil}, fecha:fechaHora, accion:"Login"});
-  //     this.router.navigateByUrl("home");
-  //   }else{
-  //     Swal.fire(
-  //       'Datos incorrectos!',
-  //       'Haga click para continuar',
-  //       'error'
-  //     );
-  //   }
-  // }
-
   async ingresar(){
     this.spinner = true;
 
@@ -76,7 +43,6 @@ export class LoginComponent {
     let usu:any;
     const user:any = await this.servBase.login(emailR.toLocaleLowerCase(), claveR).catch(
       error=>{
-        // this.spinner = false;
         Swal.fire(
           error,
           'Haga click para continuar',
@@ -92,14 +58,12 @@ export class LoginComponent {
           usu = await this.servBase.traerUsu('Usuarios',emailR.toLocaleLowerCase());
           if(usu[0].perfil == 'especialista' && usu[0].activo == false){
             this.servBase.logout();
-            // this.spinner = false;
             Swal.fire(
               'Su usuario todavia no ha sido habilitado',
               'Haga click para continuar',
               'error'
             );
           }else{
-            // this.spinner = false;
             Swal.fire(
               'Bienvenido ' + user?.user.email + "!",
               'Haga click para continuar',
@@ -108,7 +72,6 @@ export class LoginComponent {
           }
         }else{
           this.servBase.logout();
-          // this.spinner = false;
           Swal.fire(
             'Debes verificar el mail antes de loguearte!',
             'Haga click para continuar',
@@ -120,7 +83,6 @@ export class LoginComponent {
 
     this.spinner = false;
   }
-
 
   llenar(mail:string, clave:string){
     this.formLogin.setValue({emailR: mail, claveR: clave});
