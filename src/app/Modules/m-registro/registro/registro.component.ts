@@ -181,6 +181,7 @@ export class RegistroComponent {
         if(this.formEspecialista.value.especialidadR != ""){
 
           this.miEspecialista.especialidad.push(this.formEspecialista.value.especialidadR);
+          this.servBase.guardarObjetoSinID({nombre: this.formEspecialista.value.especialidadR}, "Especialidades");
         }
         
     }

@@ -1,0 +1,51 @@
+<div>
+    <!-- <div *ngIf="this.filtro != ''">
+        <h6>{{this.filtro}}: </h6>
+        <div *ngIf="this.filtro == 'Especialista'">
+            <button *ngFor="let e of this.especialistas" (click)="this.filtrar($event, e)">{{e.nombre}} {{e.apellido}}</button>
+        </div>
+        <div *ngIf="this.filtro == 'Especialidad'">
+            <button *ngFor="let e of this.especialidades" (click)="this.filtrar($event, e)">{{e}}</button>
+        </div>
+    </div> -->
+    
+    <input type="search" placeholder="Filtro" [formControl]="this.fil">
+    <!-- <div>
+        <button *ngFor="let e of this.especialistas | filtro:filtro2" (click)="this.filtrar($event, e)">{{e.nombre}} {{e.apellido}}</button>
+    </div> -->
+
+    <div>
+        <table class="table table-striped text-center">
+            <thead>
+                <tr>
+                    <th>Dia</th>
+                    <th>Horario</th>
+                    <th>Especialista</th>
+                    <th>Especialidad</th>
+                    <th>Paciente</th>
+                    <!-- <th>Reseña</th>
+                    <th>Encuesta</th>
+                    <th>Calificacion</th> -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let t of this.turnos | filtro:filtro">
+                    <td>{{t.info.fecha}}</td>
+                    <td>{{t.info.horario}}</td>
+                    <td>{{t.especialista.nombre}} {{t.especialista.apellido}}</td>
+                    <td>{{t.especialista.especialidad}}</td>
+                    <td>{{t.paciente.nombre}} {{t.paciente.apellido}}</td>
+                    <!-- <td><a href="#">ver</a></td>
+                    <td><a href="#">ver</a></td>
+                    <td *ngIf="t.calificacion != '' else pendiente">{{t.calificacion }}/5</td>
+                    <ng-template #pendiente>
+                        <td>Pendiente</td>
+                    </ng-template> -->
+                    <td *ngIf="t.estado != 'rechazado' && t.estado != 'cancelado' && t.estado != 'finalizado' else estado"><button (click)="cancelar(t)">cancelar</button></td>
+                    <ng-template #estado>
+                        <td>{{t.estado}}</td>
+                    </ng-template>
+                </tr>
+            </tbody>
+        </table>
+</div>

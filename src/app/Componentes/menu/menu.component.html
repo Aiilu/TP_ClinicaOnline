@@ -17,8 +17,11 @@
             <li class="list-inline-item p-3" *ngIf="this.usu?.perfil == 'administrador'">
                 <a class="text-white" routerLink="usuarios">Usuarios</a>
             </li>
-            <li class="list-inline-item p-3" *ngIf="this.usu?.mail">
+            <li class="list-inline-item p-3" *ngIf="(this.usu?.perfil == 'especialista') || (this.usu?.perfil == 'paciente')">
                 <a class="text-white" routerLink="misTurnos">Mis Turnos</a>
+            </li>
+            <li class="list-inline-item p-3" *ngIf="this.usu?.perfil == 'administrador'">
+                <a class="text-white" routerLink="turnos">Turnos</a>
             </li>
             <li class="list-inline-item p-3" *ngIf="this.usu?.mail">
                 <a class="text-white" routerLink="perfil">Perfil</a>

@@ -2,3 +2,28 @@
     width: 5em;
     height: 5em;
 }
+
+.verde
+{
+    background-color: green;
+}
+
+.rojo
+{
+    background-color: red;
+}
+
+.violeta
+{
+    background-color: violet;
+}
+
+.celeste
+{
+    background-color: aqua;
+}
+
+.amarillo
+{
+    background-color: yellow;
+}

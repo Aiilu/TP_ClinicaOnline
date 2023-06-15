@@ -12,6 +12,8 @@ const routes: Routes = [
   {path: 'usuarios', loadChildren: () => import('./Modules/m-usuarios/m-usuarios.module').then(m => m.MUsuariosModule)},
   {path: 'perfil', loadChildren: () => import('./Modules/m-perfil/m-perfil.module').then(m => m.MPerfilModule)},
   {path: 'solTur', loadChildren: () => import('./Modules/m-solic-turnos/m-solic-turnos.module').then(m => m.MSolicTurnosModule)},
+  {path: 'misTurnos', loadChildren: () => import('./Modules/m-mis-turnos/m-mis-turnos.module').then(m => m.MMisTurnosModule)},
+  {path: 'turnos', loadChildren: () => import('./Modules/m-turnos/m-turnos.module').then(m => m.MTurnosModule)},
   {path:'**', component: NotFoundComponent}
 ];
 
