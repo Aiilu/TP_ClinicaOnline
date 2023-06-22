@@ -1,4 +1,5 @@
-<div>
+<img class="mt-5 pt-5 h-25 w-25" src="./assets/spinner.gif" alt="spinner" *ngIf="this.spinner == true">
+<div *ngIf="!this.modal && this.spinner == false && !this.modalEncuesta">
     <!-- <div *ngIf="this.filtro != ''">
         <h6>{{this.filtro}}: </h6>
         <div *ngIf="this.filtro == 'Especialista'">
@@ -20,32 +21,49 @@
                 <tr>
                     <th>Dia</th>
                     <th>Horario</th>
-                    <th>Especialista</th>
+                    <th *ngIf="this.filtro.perfil != 'E'">Especialista</th>
                     <th>Especialidad</th>
-                    <th>Paciente</th>
-                    <!-- <th>Reseña</th>
-                    <th>Encuesta</th>
-                    <th>Calificacion</th> -->
+                    <th *ngIf="this.filtro.perfil != 'P'">Paciente</th>
+                    <th *ngIf="this.filtro.perfil != 'A'">Reseña</th>
+                    <th *ngIf="this.filtro.perfil == 'P'">Encuesta</th>
+                    <th *ngIf="this.filtro.perfil != 'A'">Calificacion</th>
+                    <th>Estado</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let t of this.turnos | filtro:filtro">
-                    <td>{{t.info.fecha}}</td>
+                    <td>{{t.info.fecha | fecha}}</td>
                     <td>{{t.info.horario}}</td>
-                    <td>{{t.especialista.nombre}} {{t.especialista.apellido}}</td>
+                    <td *ngIf="this.filtro.perfil != 'E'">{{t.especialista.nombre}} {{t.especialista.apellido}}</td>
                     <td>{{t.especialista.especialidad}}</td>
-                    <td>{{t.paciente.nombre}} {{t.paciente.apellido}}</td>
-                    <!-- <td><a href="#">ver</a></td>
-                    <td><a href="#">ver</a></td>
-                    <td *ngIf="t.calificacion != '' else pendiente">{{t.calificacion }}/5</td>
-                    <ng-template #pendiente>
-                        <td>Pendiente</td>
-                    </ng-template> -->
-                    <td *ngIf="t.estado != 'rechazado' && t.estado != 'cancelado' && t.estado != 'finalizado' else estado"><button (click)="cancelar(t)">cancelar</button></td>
-                    <ng-template #estado>
-                        <td>{{t.estado}}</td>
-                    </ng-template>
+                    <td *ngIf="this.filtro.perfil != 'P'">{{t.paciente.nombre}} {{t.paciente.apellido}}</td>
+                    <td *ngIf="this.filtro.perfil != 'A' && t.estado == 'finalizado'"><button (click)="this.abrirEncuesta(t, 'resenia')">Abrir</button></td>
+                    <td *ngIf="this.filtro.perfil != 'A' && t.estado != 'finalizado'">No disponible</td>
+                    <td  *ngIf="this.filtro.perfil == 'P' && t.marcaEncuesta == 'S'">Completada</td>
+                    <td  *ngIf="this.filtro.perfil == 'P' && t.marcaEncuesta == 'N'"><button (click)="this.abrirEncuesta(t, 'encuesta')">Completar</button></td>
+                    <td  *ngIf="this.filtro.perfil == 'P' && t.marcaEncuesta == ''">No disponible</td>
+                    <td *ngIf="this.filtro.perfil != 'A' &&  t.calificacion != ''">{{t.calificacion }}/5</td>
+                    <td *ngIf="(t.calificacion == '' && this.filtro.perfil == 'E') || (t.calificacion == '' && this.filtro.perfil == 'P' && t.estado != 'finalizado')">Pendiente</td>
+                    <td *ngIf="this.filtro.perfil == 'P' && t.estado == 'finalizado' && t.calificacion == ''"><button (click)="this.abrirEncuesta(t, 'calificacion')">Calificar</button></td>
+                    <td>{{t.estado}}</td>
+                    <td *ngIf="((this.filtro.perfil == 'P' || this.filtro.perfil == 'A') && (t.estado == 'pendiente' || t.estado == 'aceptado')) || (this.filtro.perfil == 'E' && t.estado == 'aceptado')"><button (click)="this.abrirModal(t, 'cancelado')">Cancelar</button></td>
+                    <td *ngIf="t.estado == 'pendiente' && this.filtro.perfil == 'E'"><button (click)="this.aceptar(t)">Aceptar</button></td>
+                    <td *ngIf="t.estado == 'pendiente' && this.filtro.perfil == 'E'"><button (click)="this.abrirModal(t, 'rechazado')">Rechazar</button></td>
+                    <td *ngIf="t.estado == 'aceptado' && this.filtro.perfil == 'E'"><button (click)="this.abrirModal(t, 'finalizado')">Finalizar</button></td>
                 </tr>
             </tbody>
         </table>
+    </div>
 </div>
+
+<ng-container *ngIf="this.accion != ''">
+    <dialog id="modal" [open]="this.modal">
+        <app-comentario [seleccion]="this.accion" [turno]="this.turnoAux" (cerrar)="this.cerrarModal($event)"></app-comentario>
+    </dialog>
+</ng-container>
+
+<ng-container *ngIf="this.modalEncuesta">
+    <dialog id="modalEncuesta" [open]="this.modalEncuesta">
+        <app-encuesta [seleccionE]="this.accionE" [turnoE]="this.turnoAux" (cerrarAtencion)="this.cerrarEncuesta($event)"></app-encuesta>
+    </dialog>
+</ng-container>

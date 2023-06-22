@@ -1,0 +1,73 @@
+<ng-container *ngIf="this.seleccionE == 'resenia'">
+    <p>Diagnostico: {{this.turnoE.resenia.diagnostico}}</p>
+    <p>Altura: {{this.turnoE.resenia.altura}}</p>
+    <p>Peso: {{this.turnoE.resenia.peso}}</p>
+    <p>Presion: {{this.turnoE.resenia.presion}}</p>
+    <p>Temperatura: {{this.turnoE.resenia.temperatura}}</p>
+    <p *ngIf="this.turnoE.resenia.var1.prob != ''">{{this.turnoE.resenia.var1.prob}}: {{this.turnoE.resenia.var1.cant}}</p>
+    <p *ngIf="this.turnoE.resenia.var2.prob != ''">{{this.turnoE.resenia.var2.prob}}: {{this.turnoE.resenia.var2.cant}}</p>
+    <p *ngIf="this.turnoE.resenia.var3.prob != ''">{{this.turnoE.resenia.var3.prob}}: {{this.turnoE.resenia.var3.cant}}</p>
+    <br>
+    <button (click)="this.salir()">Salir</button>
+</ng-container>
+
+<ng-container *ngIf="this.seleccionE == 'encuesta'">
+    <form [formGroup]="formEncuesta" (ngSubmit)="this.guardar()">
+        <h2>Encuesta</h2>
+
+        <label for="preg1">¿Que tan buena fue la recepcion?</label>
+        <br>
+        <input type="radio" name="preg1" id="preg1" value="B" formControlName="preg1">
+        <label for="preg1">Buena</label>
+        <br>
+        <input type="radio" name="preg1" id="preg1" value="M" formControlName="preg1">
+        <label for="preg1">Mala</label>
+        <br>
+        <input type="radio" name="preg1" id="preg1" value="MB" formControlName="preg1">
+        <label for="preg1">Muy buena</label>
+        <br>
+        <input type="radio" name="preg1" id="preg1" value="MM" formControlName="preg1">
+        <label for="preg1">Muy mala</label>
+
+        <br><br>
+        <label for="preg2" class="">¿Tienes algo que aportar para la pagina?</label>
+        <br>
+        <textarea id="preg2" cols="30" rows="2" formControlName="preg2" class=""></textarea>
+        <small class="invalid"
+            *ngIf="formEncuesta.controls['preg2'].errors?.['maxLength'] && formEncuesta.controls['preg2'].touched">El
+            comentario deber tener entre 5 y 500 caracteres</small>
+        <small class="invalid"
+            *ngIf="formEncuesta.controls['preg2'].errors?.['containsSpaces'] && formEncuesta.controls['preg2'].touched">El
+            comentario no puede estar vacio</small>
+
+        <br>
+        <button type="submit" [disabled]="formEncuesta.invalid">Enviar</button><br>
+    </form>
+    <button (click)="this.salir()">Salir</button>
+</ng-container>
+
+<ng-container *ngIf="this.seleccionE == 'calificacion'">
+    <form [formGroup]="formCalificacion" (ngSubmit)="this.calificar()">
+        <h2>Calificacion</h2>
+
+        <label for="preg1">¿Que tan buena fue la atencion del especialista?</label>
+        <br>
+        <img [src]='ruta' alt="estrella" *ngFor="let ruta of this.estrellas; let i=index" (click)="puntuar(i)">
+        <br>
+        <small class="invalid"
+            *ngIf="formCalificacion.controls['preg1'].errors != null && formCalificacion.controls['preg2'].touched">Debe puntuar la atencion</small>
+        <br><br>
+        <label for="preg2" class="">Deje un comentario de como fue la atencion del Especialista</label>
+        <br>
+        <textarea id="preg2" cols="30" rows="2" formControlName="preg2" class=""></textarea>
+        <small class="invalid"
+            *ngIf="formCalificacion.controls['preg2'].errors?.['maxLength'] && formCalificacion.controls['preg2'].touched">El
+            comentario deber tener entre 5 y 500 caracteres</small>
+        <small class="invalid"
+            *ngIf="formCalificacion.controls['preg2'].errors?.['containsSpaces'] && formCalificacion.controls['preg2'].touched">El
+            comentario no puede estar vacio</small>
+        <br>
+        <button type="submit" [disabled]="formCalificacion.invalid">Enviar</button><br>
+    </form>
+    <button (click)="this.salir()">Salir</button>
+</ng-container>

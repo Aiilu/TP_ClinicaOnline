@@ -83,7 +83,7 @@
             <button (click)="this.cambiarListado('especialista')">Especialista</button>
         </div>
         <div>
-            <table class="table table-striped text-center" *ngIf="this.listado == 'paciente'">
+            <table class="table table-striped text-center" *ngIf="this.listado == 'paciente' && !this.modal">
                 <thead>
                     <tr>
                         <th>Nombre</th>
@@ -92,8 +92,9 @@
                         <th>DNI</th>
                         <th>Obra Social</th>
                         <th>Mail</th>
-                        <th>Foto 1</th>
-                        <th>Foto 2</th>
+                        <th>Hist. Cli.</th>
+                        <!-- <th>Foto 1</th>
+                        <th>Foto 2</th> -->
                     </tr>
                 </thead>
                 <tbody>
@@ -104,8 +105,9 @@
                         <td>{{p.dni}}</td>
                         <td>{{p.obraSocial}}</td>
                         <td>{{p.mail}}</td>
-                        <td>{{p.foto}}</td>
-                        <td>{{p.foto2}}</td>
+                        <td><button (click)="this.mostrarHist(p.mail)">Ver</button></td>
+                        <!-- <td>{{p.foto}}</td>
+                        <td>{{p.foto2}}</td> -->
                     </tr>
                 </tbody>
             </table>
@@ -119,7 +121,7 @@
                         <th>DNI</th>
                         <th>Especialidad</th>
                         <th>Mail</th>
-                        <th>Foto</th>
+                        <!-- <th>Foto</th> -->
                         <th>Accion</th>
                     </tr>
                 </thead>
@@ -131,7 +133,7 @@
                         <td>{{e.dni}}</td>
                         <td>{{e.especialidad}}</td>
                         <td>{{e.mail}}</td>
-                        <td>{{e.foto}}</td>
+                        <!-- <td>{{e.foto}}</td> -->
                         <td>
                             <button *ngIf="e.activo" (click)="this.toggleActivo(e)">Inhabilitar</button>
                             <button *ngIf="!e.activo" (click)="this.toggleActivo(e)">Habilitar</button>
@@ -140,5 +142,11 @@
                 </tbody>
             </table>
         </div>
+        <ng-container *ngIf="this.modal">
+            <dialog id="modal" [open]="this.modal">
+                <app-histclinico [mailP]="this.mailP" (salirH)="this.salir()"></app-histclinico>
+            </dialog>
+        </ng-container>
     </div>
+    
 </div>

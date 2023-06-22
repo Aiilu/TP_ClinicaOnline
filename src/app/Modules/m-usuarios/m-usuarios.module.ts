@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { MUsuariosRoutingModule } from './m-usuarios-routing.module';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MHistclinModule } from '../m-histclin/m-histclin.module';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     MUsuariosRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MHistclinModule
   ]
 })
 export class MUsuariosModule { }

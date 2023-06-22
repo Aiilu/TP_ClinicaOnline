@@ -2,9 +2,6 @@
     <h4 class="text-white"><a class="text-white" routerLink="home">Clinica - Torrez</a></h4>
     <nav>
         <ul class="list-unstyled list-inline">
-            <!-- <li class="list-inline-item p-3" *ngIf="(this.usuario | async)?.mail">
-                <p class="text-white">{{(this.usuario | async)?.mail}}</p>
-            </li> -->
             <li class="list-inline-item p-3" *ngIf="this.usu?.mail">
                 <p class="text-white">{{this.usu?.mail}}</p>
             </li>
@@ -29,10 +26,10 @@
             <li class="list-inline-item p-3" *ngIf="(this.usu?.perfil == 'administrador') || (this.usu?.perfil == 'paciente')">
                 <a class="text-white" routerLink="solTur">Solicitar Turnos</a>
             </li>
-            <li class="list-inline-item p-3">
+            <li class="list-inline-item p-3" *ngIf="this.usu?.perfil == 'especialista'">
                 <a class="text-white" routerLink="pacientes">Pacientes</a>
             </li>
-            <li class="list-inline-item p-3">
+            <li class="list-inline-item p-3" *ngIf="this.usu?.perfil == 'administrador'">
                 <a class="text-white" routerLink="graficos">Graficos</a>
             </li>
             <li class="list-inline-item p-3" *ngIf="this.usu?.mail">

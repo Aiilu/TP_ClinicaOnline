@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { MMisTurnosRoutingModule } from './m-mis-turnos-routing.module';
 import { MisTurnosComponent } from './mis-turnos/mis-turnos.component';
+import { MFiltradoModule } from '../m-filtrado/m-filtrado.module';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { MisTurnosComponent } from './mis-turnos/mis-turnos.component';
   ],
   imports: [
     CommonModule,
-    MMisTurnosRoutingModule
+    MMisTurnosRoutingModule,
+    MFiltradoModule
   ]
 })
 export class MMisTurnosModule { }

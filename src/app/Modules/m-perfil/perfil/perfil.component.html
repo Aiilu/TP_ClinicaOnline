@@ -1,5 +1,5 @@
 <img class="mt-5 pt-5 h-25 w-25" src="./assets/spinner.gif" alt="spinner" *ngIf="this.spinner == true">
-<div class="contenedor" *ngIf="this.spinner == false">
+<div class="contenedor" *ngIf="this.spinner == false && !this.modal">
     <div class="contenedor__perfil">
         <img class="perfil__imagen" [src]="this.usu?.foto" alt="Img Perfil">
         <p>Nombre: {{this.usu?.nombre}}</p>
@@ -10,6 +10,7 @@
         <div [ngSwitch]="this.usu?.perfil">
             <div *ngSwitchCase="'paciente'">
                 <p>Obra Social: {{this.usu?.obraSocial}}</p>
+                <p>Historial Clinico: </p><button (click)="this.abrir()">Ver</button>
             </div>
             <div *ngSwitchCase="'especialista'">
                 <p>Especialidad: {{this.usu?.especialidad}}</p>
@@ -18,7 +19,6 @@
     </div>
 
     <div class="contenedor__horarios">
-
         <button *ngIf="this.usu?.perfil == 'especialista'" (click)="this.mostrarHorarios()">Mis horarios</button><br><br>
 
         <div *ngIf="this.horarios">
@@ -63,6 +63,10 @@
             </div>
             <button *ngIf="this.arrayDias.length != 0" (click)="this.guardar()">Guardar</button>
         </div>
-        {{this.arrayDias | json}}
-        </div>
+    </div>
 </div>
+<ng-container *ngIf="this.modal">
+    <dialog id="modal" [open]="this.modal">
+        <app-histclinico [mailP]="this.usu?.mail" (salirH)="this.salir()"></app-histclinico>
+    </dialog>
+</ng-container>

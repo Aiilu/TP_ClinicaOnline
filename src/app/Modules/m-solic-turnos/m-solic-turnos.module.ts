@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { MSolicTurnosRoutingModule } from './m-solic-turnos-routing.module';
 import { SolicTurnosComponent } from './solic-turnos/solic-turnos.component';
+import { MPipesModule } from '../m-pipes/m-pipes.module';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { SolicTurnosComponent } from './solic-turnos/solic-turnos.component';
   ],
   imports: [
     CommonModule,
-    MSolicTurnosRoutingModule
+    MSolicTurnosRoutingModule,
+    MPipesModule
   ]
 })
 export class MSolicTurnosModule { }

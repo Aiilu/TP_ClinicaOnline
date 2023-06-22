@@ -14,6 +14,8 @@ const routes: Routes = [
   {path: 'solTur', loadChildren: () => import('./Modules/m-solic-turnos/m-solic-turnos.module').then(m => m.MSolicTurnosModule)},
   {path: 'misTurnos', loadChildren: () => import('./Modules/m-mis-turnos/m-mis-turnos.module').then(m => m.MMisTurnosModule)},
   {path: 'turnos', loadChildren: () => import('./Modules/m-turnos/m-turnos.module').then(m => m.MTurnosModule)},
+  {path: 'pacientes', loadChildren: () => import('./Modules/m-paciente/m-paciente.module').then(m => m.MPacienteModule)},
+  {path: 'graficos', loadChildren: () => import('./Modules/m-graficos/m-graficos.module').then(m => m.MGraficosModule)},
   {path:'**', component: NotFoundComponent}
 ];
 

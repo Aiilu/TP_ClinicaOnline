@@ -18,6 +18,7 @@ export class PerfilComponent {
   especialidadSeleccionada:string = "";
   spinner:boolean = false;
   horarios:boolean = false;
+  modal:boolean = false;
 
   constructor(private servBase:BaseDatosService) {}
 
@@ -86,12 +87,10 @@ export class PerfilComponent {
     if($event.srcElement.classList.contains('rojo'))
     {
       let indice = this.arrayDias.findIndex((a)=>(a.dia == dia) && (a.horario == horarioAux) && (a.especialidad == especialidad));
-      console.log("Borro el indice: " + indice);
       this.arrayDias.splice(indice, 1);
     }
     else
     {
-      console.log("Lo agrego");
       this.arrayDias.push({dia: dia, horario: horarioAux});
     }
 
@@ -147,5 +146,12 @@ export class PerfilComponent {
   mostrarHorarios()
   {
     this.horarios = true;
+  }
+
+  abrir(){
+    this.modal = true;
+  }
+  salir(){
+    this.modal = false;
   }
 }

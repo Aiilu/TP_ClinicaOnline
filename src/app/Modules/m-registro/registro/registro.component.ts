@@ -181,7 +181,7 @@ export class RegistroComponent {
         if(this.formEspecialista.value.especialidadR != ""){
 
           this.miEspecialista.especialidad.push(this.formEspecialista.value.especialidadR);
-          this.servBase.guardarObjetoSinID({nombre: this.formEspecialista.value.especialidadR}, "Especialidades");
+          this.servBase.guardarObjetoSinID({nombre: this.formEspecialista.value.especialidadR, foto: 'https://firebasestorage.googleapis.com/v0/b/clinicaonline-torrez.appspot.com/o/fotos%2Fdotora.jpg?alt=media&token=6c1541ed-6907-4523-bd57-7f7c8702b64e'}, "Especialidades");
         }
         
     }

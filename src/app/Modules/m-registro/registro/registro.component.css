@@ -269,7 +269,7 @@ input[type=text]:placeholder {
 
 button{
   margin-right: 1em;
-  border-radius: .4em;
+  /* border-radius: .4em; */
 }
 
 .captcha{
@@ -278,4 +278,17 @@ button{
 
 [disabled]{
   background-color: gray !important;
+}
+
+.foto{
+  height: 6em;
+  width: 6em;
+  margin-left: 1em;
+  border-radius: 50% !important;
+  background-size:cover;
+}
+
+.foto2{
+  background-repeat: no-repeat;
+  background-position: -1.36em;
 }

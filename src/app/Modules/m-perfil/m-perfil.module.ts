@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { MPerfilRoutingModule } from './m-perfil-routing.module';
 import { PerfilComponent } from './perfil/perfil.component';
+import { MHistclinModule } from '../m-histclin/m-histclin.module';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { PerfilComponent } from './perfil/perfil.component';
   ],
   imports: [
     CommonModule,
-    MPerfilRoutingModule
+    MPerfilRoutingModule,
+    MHistclinModule
   ]
 })
 export class MPerfilModule { }

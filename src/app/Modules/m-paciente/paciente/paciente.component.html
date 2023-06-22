@@ -1,0 +1,36 @@
+<ng-container *ngIf="this.mailP == ''  else modal">
+    <h3>Pacientes:</h3>
+    <br>
+    <ng-container *ngIf="!this.spinner else spinnerI">
+        <table class="table table-striped text-center" *ngIf="this.pacientes.length != 0 else vacio">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Hist. Cli.</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let p of this.pacientes">
+                    <td>{{p.nombre}}</td>
+                    <td>{{p.apellido}}</td>
+                    <td><button (click)="this.abrir(p.mail)">Ver</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </ng-container>
+
+    <ng-template #spinnerI>
+        <img class="mt-5 pt-5 h-25 w-25" src="./assets/spinner.gif" alt="spinner">
+    </ng-template>
+
+    <ng-template #vacio>
+        <h6>Aun no tiene ningun paciente.</h6>
+    </ng-template>
+</ng-container>
+
+<ng-template #modal>
+    <dialog id="modal" [open]="this.mailP != ''">
+        <app-histclinico [mailP]="this.mailP" (salirH)="this.salir()"></app-histclinico>
+    </dialog>
+</ng-template>

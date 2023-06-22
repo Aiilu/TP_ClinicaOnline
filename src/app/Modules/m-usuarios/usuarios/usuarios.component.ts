@@ -21,6 +21,8 @@ export class UsuariosComponent {
   esp:any[] = [];
   miAdmin:Persona = new Persona("", "", "", 0, 0, "", "", "", "");
   spinner:boolean = false;
+  modal:boolean = false;
+  mailP:string = "";
 
   constructor(private fb: FormBuilder, private servBase:BaseDatosService, private router:Router){
     this.formAdmin = this.fb.group({
@@ -173,5 +175,17 @@ export class UsuariosComponent {
     const foto = this.formAdmin.get('fotoR');
 
     foto?.setValue($event.target.files[0]);
+  }
+
+  mostrarHist(mail:string)
+  {
+    this.mailP = mail;
+    this.modal = true;
+  }
+
+  salir()
+  {
+    this.modal = false;
+    this.mailP = "";
   }
 }

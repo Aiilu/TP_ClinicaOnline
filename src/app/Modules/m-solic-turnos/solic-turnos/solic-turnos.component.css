@@ -1,3 +1,7 @@
+button{
+    margin-right: .5em;
+}
+
 .imagen{
     width: 5em;
     height: 5em;
@@ -5,25 +9,45 @@
 
 .verde
 {
-    background-color: green;
+    border: 3px solid green;
+    /* background-color: green; */
 }
 
 .rojo
 {
-    background-color: red;
+    border: 3px solid red;
+    /* background-color: red; */
 }
 
 .violeta
 {
-    background-color: violet;
+    border: 3px solid violet;
+    /* background-color: violet; */
 }
 
 .celeste
 {
-    background-color: aqua;
+    border: 3px solid aqua;
+    /* background-color: aqua; */
 }
 
 .amarillo
 {
-    background-color: yellow;
+    border: 3px solid yellow;
+    /* background-color: yellow; */
+}
+
+.foto{
+    height: 6em;
+    width: 6em;
+    background-size: cover;
+    text-shadow: white -.05em -.05em;
+    color: red;
+    font-weight: 600; 
+}
+
+.foto2{
+    /* font-size: 0.8em; */
+    position: relative;
+    top: -2.43em;
 }

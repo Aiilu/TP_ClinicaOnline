@@ -30,9 +30,18 @@
                     <input type="submit" class="fadeIn fourth" value="Ingresar" [disabled]="formLogin.invalid">
       </form>
     </div>
-    <div class="justify-content-center mb-2 bori">
-      <button class="fadeIn fourth p-2 col-2 redondos" (click)="this.llenar('Leo@gmail.com', 'chau1234')">Admin</button>
-      <button class="fadeIn fourth p-2 col-3 redondos" (click)="this.llenar('Ailen@gmail.com','hola1234')">Especialista</button>
-      <button class="fadeIn fourth p-2 col-2 redondos" (click)="this.llenar('Pepe@gmail.com','hola1234')">Paciente</button>
-    </div>
+</div>
+<div class="justify-content-center mb-2 bori">
+  <div>
+    <h6>Pacientes</h6>
+    <button *ngFor="let pac of this.pac" [ngStyle]="{'background-image':'url(' + pac.foto + ')'}" class="foto" (click)="this.llenar(pac.mail, pac.clave)">{{pac.nombre}}</button>
+  </div>
+  <div>
+    <h6>Especialistas</h6>
+    <button *ngFor="let esp of this.esp" [ngStyle]="{'background-image':'url(' + esp.foto + ')'}" class="foto" (click)="this.llenar(esp.mail, esp.clave)">{{esp.nombre}}</button>
+  </div>
+  <div>
+    <h6>Administradores</h6>
+    <button *ngFor="let adm of this.adm" [ngStyle]="{'background-image':'url(' + adm.foto + ')'}" class="foto" (click)="this.llenar(adm.mail, adm.clave)">{{adm.nombre}}</button>
+  </div>
 </div>

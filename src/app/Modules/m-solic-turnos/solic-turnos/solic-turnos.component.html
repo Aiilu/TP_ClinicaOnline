@@ -1,18 +1,9 @@
-<!-- Entre 2 y 6 click. 10 ya son muchos.
-En base a la especialidad, traes al medico, y en base al medico, traes su horario.
-Tambien son botones, con foto y nombre en las especialidades. 
-
-Se debera seleccionar Especialidad, Especialista, Dia y Horario del turno 
-El usuario guarda sus turnos, el especialista guarda sus turnos y hay un TURNOS general
--->
 <img class="mt-5 pt-5 h-25 w-25" src="./assets/spinner.gif" alt="spinner" *ngIf="this.spinner == true">
 <div class="contenedor" *ngIf="this.spinner == false">
 
     <div *ngIf="this.usuario?.perfil == 'administrador'">
         <h3>Lista de Pacientes</h3>
         <div *ngIf="this.listaPacientes.length !=0 else sinPacientes">
-            <!-- <button *ngFor="let p of this.listaPacientes" (click)="this.selPaciente(p)">{{p.nombre}} {{p.apellido}}</button>
-             -->
             <button *ngFor="let p of this.listaPacientes" (click)="this.selPaciente($event,p)">{{p.nombre}} {{p.apellido}}</button>
         </div>
         <ng-template #sinPacientes>
@@ -21,28 +12,30 @@ El usuario guarda sus turnos, el especialista guarda sus turnos y hay un TURNOS 
     </div>
     
     <div *ngIf="(this.usuario?.perfil == 'paciente') || (this.mostrarAdmin == true)">
-        <!-- <button *ngFor="let esp of this.especialidades" (click)="this.seleccionBotonEsp($event); this.seleccionEsp(esp.nombre)">{{esp.nombre}}</button> -->
-        <button *ngFor="let esp of this.especialidades" (click)="this.seleccionEsp($event,esp.nombre)">{{esp.nombre}}</button>
+        <ng-container *ngFor="let esp of this.especialidades">
+            <button *ngIf="esp.foto != 'https://firebasestorage.googleapis.com/v0/b/clinicaonline-torrez.appspot.com/o/fotos%2Fdotora.jpg?alt=media&token=6c1541ed-6907-4523-bd57-7f7c8702b64e' else default" class="foto" [ngStyle]="{'background-image':'url('+ esp.foto +')'}" (click)="this.seleccionEsp($event,esp.nombre)"></button>
+            <ng-template #default>
+                <button class="foto foto2" [ngStyle]="{'background-image':'url('+ esp.foto +')'}" (click)="this.seleccionEsp($event,esp.nombre)">{{esp.nombre}}</button>
+            </ng-template>
+        </ng-container>
     </div>
 
-    <!-- <div *ngIf="this.mostrarInfo"> -->
-        <div *ngIf="this.listaEspSelec.length != 0">
-            <!-- <button *ngFor="let esp of this.listaEspSelec" (click)="this.seleccionBoton($event, 'rojo'); this.seleccionEsp2(esp.mail)">{{esp.nombre}}<img class="imagen" [src]="esp.foto" alt="Img Esp"></button> -->
-
-            <button *ngFor="let esp of this.listaEspSelec" (click)="this.seleccionEsp2($event,esp.mail)">{{esp.nombre}}<img class="imagen" [src]="esp.foto" alt="Img Esp"></button>
-        </div>
+    <div *ngIf="this.listaEspSelec.length != 0">
+        <!-- <button *ngFor="let esp of this.listaEspSelec" (click)="this.seleccionEsp2($event,esp.mail)">{{esp.nombre}}<img class="imagen" [src]="esp.foto" alt="Img Esp"></button> -->
+        <button *ngFor="let esp of this.listaEspSelec" class="foto" [ngStyle]="{'background-image':'url('+ esp.foto +')'}" (click)="this.seleccionEsp2($event,esp.mail)">{{esp.nombre}}</button>
+    </div>
     
-        <div *ngIf="this.listaDias.length !=0">
-            <!-- <button *ngFor="let dia of this.listaDias" (click)="this.seleccionBotonDia($event); this.selDia(dia.horario, dia.nro)">{{dia.horario.dia}}: {{dia.nro}}</button> -->
-            <button *ngFor="let dia of this.listaDias" (click)="this.selDia($event,dia.horario, dia.nro)">{{dia.horario.dia}}: {{dia.nro}}</button>
-        </div>
+    <!-- <div *ngIf="this.listaDias.length !=0">
+        <button *ngFor="let dia of this.listaDias" (click)="this.selDia($event,dia.horario, dia.nro)">{{dia.horario.dia}}: {{dia.nro}}</button>
+    </div>
     
-        <div *ngIf="this.listaTurnos.length !=0">
-            <!-- <button *ngFor="let turno of this.listaTurnos" (click)="this.seleccionBoton($event, 'celeste');  this.selTurno(turno)">{{turno}}</button> -->
-            <button *ngFor="let turno of this.listaTurnos" (click)="this.selTurno($event,turno)">{{turno}}</button>
-        </div>
-        <!-- <button (click)="this.guardarTurno()" *ngIf="this.mostrarBoton">Guardar</button> -->
-        <button (click)="this.guardarTurno()" *ngIf="this.horarioSel != ''">Guardar</button>
+    <div *ngIf="this.listaTurnos.length !=0">
+        <button *ngFor="let turno of this.listaTurnos" (click)="this.selTurno($event,turno)">{{turno}}</button>
+    </div> -->
 
-    <!-- </div> -->
+    <div *ngIf="this.listaTurnos.length !=0">
+        <button *ngFor="let turno of this.listaTurnos" (click)="this.selTurno($event,turno)">{{turno.nro | fecha}} {{turno.horario}}</button>
+    </div>
+
+    <button (click)="this.guardarTurno()" *ngIf="this.horarioSel != ''">Guardar</button>
 </div>

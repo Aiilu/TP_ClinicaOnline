@@ -19,7 +19,8 @@ export class SolicTurnosComponent {
   listaEspecialistas:any[] = [];
   listaEspSelec:Especialista[] = [];
   listaDias:any[] = [];
-  listaTurnos:string[] = [];
+  // listaTurnos:string[] = [];
+  listaTurnos:any[] = [];
   especSeleccionada:string = "";
   fechas:any = [];
   especialistaSel:any = {};
@@ -59,7 +60,9 @@ export class SolicTurnosComponent {
           d = 'Sabado';
           break;
       }
-      this.fechas.push({dia:d,nro:fecha.toLocaleDateString()});
+      // this.fechas.push({dia:d,nro:fecha.toLocaleDateString()});
+      let nro = (fecha.getFullYear() *10000 + (fecha.getMonth()+1)*100 + fecha.getDate());
+      this.fechas.push({dia:d,nro:nro});
       fecha.setDate(fecha.getDate() + 1);
     }
   }
@@ -117,38 +120,41 @@ export class SolicTurnosComponent {
     this.susEsp.unsubscribe();
   }
 
-  // seleccionEsp(seleccion:string)
+  seleccionEsp($event:any,seleccion:string)
+  {
+    this.horarioSel = '';
+    this.diaSel = '';
+    this.fechaSel = '';
+    this.listaDias = [];
+    this.listaTurnos = [];
+    this.especialistaSel = {};
+    this.listaEspSelec = [];
+    this.especSeleccionada = seleccion;
+
+    this.borrarColor('rojo');
+    this.seleccionBoton($event, 'verde');
+
+    this.listaEspecialistas.forEach(
+      (especialista:Especialista)=>{
+        for (let i = 0; i < especialista.especialidad.length; i++) {
+           if(seleccion == especialista.especialidad[i]){
+            this.listaEspSelec.push(especialista);
+            break;
+           }
+        }
+    });
+  }
+
+  // seleccionEsp2($event:any,mail:string)
   // {
-  //   this.mostrarBoton = false;
-  //   this.mostrarInfo = true;
-  //   this.especSeleccionada = seleccion;
-  //   let existe = false;
-    
-  //   this.listaEspSelec = [];
+  //   this.horarioSel = '';
+  //   this.diaSel = '';
+  //   this.fechaSel = '';
   //   this.listaDias = [];
   //   this.listaTurnos = [];
 
-  //   this.listaEspecialistas.forEach(
-  //     (especialista:Especialista)=>{
-  //       for (let i = 0; i < especialista.especialidad.length; i++) {
-  //          if(seleccion == especialista.especialidad[i]){
-  //           existe = true;
-  //           break;
-  //          }
-  //       }
-        
-  //       if(existe){
-  //         this.listaEspSelec.push(especialista);
-  //       }
-  //       existe = false;
-  //   });
-  // }
+  //   this.seleccionBoton($event,'rojo');
 
-  // seleccionEsp2(mail:string)
-  // {
-  //   this.mostrarBoton = false;
-  //   this.listaDias = [];
-  //   this.listaTurnos = [];
   //   this.servBase.traerFiltrado("Horarios", "mail", mail).then(
   //     (horarios)=>
   //     {
@@ -176,61 +182,39 @@ export class SolicTurnosComponent {
   //   );
   // }
 
-  // selDia(dia:any, nro:any)
+  // selDia($event:any,dia:any, nro:any)
   // {
-  //     this.mostrarBoton = false;
+  //     this.horarioSel = '';
   //     this.listaTurnos = [];
   //     this.diaSel = dia.dia;
   //     this.fechaSel = nro;
+      
+  //     this.borrarColor('celeste');
+  //     this.seleccionBoton($event, 'violeta');
       
   //     if(dia.dia != 'Sabado')
   //     {
   //       if(dia.horario == '08:00 - 13:00')
   //       {
-  //         this.calcularTurnos(8, 13);
+  //         this.calcularTurnos(nro,8, 13);
   //       }
   //       else
   //       {
-  //         this.calcularTurnos(13, 19);
+  //         this.calcularTurnos(nro,13, 19);
   //       }
   //     }
   //     else
   //     {
   //       if(dia.horario == '08:00 - 11:00')
   //       {
-  //         this.calcularTurnos(8, 11);
+  //         this.calcularTurnos(nro,8, 11);
   //       }
   //       else
   //       {
-  //         this.calcularTurnos(11, 14);
+  //         this.calcularTurnos(nro,11, 14);
   //       }   
   //     }
   // }
-
-  seleccionEsp($event:any,seleccion:string)
-  {
-    this.horarioSel = '';
-    this.diaSel = '';
-    this.fechaSel = '';
-    this.listaDias = [];
-    this.listaTurnos = [];
-    this.especialistaSel = {};
-    this.listaEspSelec = [];
-    this.especSeleccionada = seleccion;
-
-    this.borrarColor('rojo');
-    this.seleccionBoton($event, 'verde');
-
-    this.listaEspecialistas.forEach(
-      (especialista:Especialista)=>{
-        for (let i = 0; i < especialista.especialidad.length; i++) {
-           if(seleccion == especialista.especialidad[i]){
-            this.listaEspSelec.push(especialista);
-            break;
-           }
-        }
-    });
-  }
 
   seleccionEsp2($event:any,mail:string)
   {
@@ -240,72 +224,61 @@ export class SolicTurnosComponent {
     this.listaDias = [];
     this.listaTurnos = [];
 
-    // this.borrarColor('celeste');
-    // this.borrarColor('violeta');
     this.seleccionBoton($event,'rojo');
 
     this.servBase.traerFiltrado("Horarios", "mail", mail).then(
       (horarios)=>
       {
-        let array:any = [];
+        // let array:any = [];
         horarios.forEach(
           (h:any)=>{
             if(h.especialidad == this.especSeleccionada)
             {
+              this.especialistaSel = {especialidad: this.especSeleccionada, nombre: h.nombre, apellido: h.apellido, mail: h.mail};
               h.horarios.forEach(
                 (e:any)=>{
-                  // array.push(e);
                   this.fechas.forEach(
                     (f:any )=> {
                       if(e.dia == f.dia){
-                        array.push({horario:e, nro:f.nro});
+                        this.selDia(e,f.nro);
                       }
                   });
                 }
               )
-              this.especialistaSel = {especialidad: this.especSeleccionada, nombre: h.nombre, apellido: h.apellido, mail: h.mail};
             }
         })
-        this.listaDias = array;
+        // this.listaDias = array;
       }
     );
   }
 
-  selDia($event:any,dia:any, nro:any)
+  selDia(dia:any, nro:any)
   {
-      this.horarioSel = '';
-      this.listaTurnos = [];
-      this.diaSel = dia.dia;
-      this.fechaSel = nro;
-      
-      this.borrarColor('celeste');
-      this.seleccionBoton($event, 'violeta');
-      
       if(dia.dia != 'Sabado')
       {
         if(dia.horario == '08:00 - 13:00')
         {
-          this.calcularTurnos(nro,8, 13);
+          this.calcularTurnos(dia.dia,nro,8, 13);
         }
         else
         {
-          this.calcularTurnos(nro,13, 19);
+          this.calcularTurnos(dia.dia,nro,13, 19);
         }
       }
       else
       {
         if(dia.horario == '08:00 - 11:00')
         {
-          this.calcularTurnos(nro,8, 11);
+          this.calcularTurnos(dia.dia,nro,8, 11);
         }
         else
         {
-          this.calcularTurnos(nro,11, 14);
+          this.calcularTurnos(dia.dia,nro,11, 14);
         }   
       }
   }
 
-  calcularTurnos(nro:string,inicio:number, fin:number)
+  calcularTurnos(dia:string,nro:string,inicio:number, fin:number)
   {
     for(let i=inicio; i<fin; i++)
     {
@@ -318,20 +291,16 @@ export class SolicTurnosComponent {
         }
       );
       if(!tomado){
-        this.listaTurnos.push(`${i}:00`);
+        this.listaTurnos.push({nro:nro, horario:`${i}:00`, dia:dia});
       }
     }
   }
 
-  // selTurno(turno:any)
-  // {
-  //   this.mostrarBoton = true;
-  //   this.horarioSel = turno;
-  // }
-
   selTurno($event:any,turno:any)
   {
-    this.horarioSel = turno;
+    this.horarioSel = turno.horario;
+    this.diaSel = turno.dia;
+    this.fechaSel = turno.nro;
     this.seleccionBoton($event,'celeste');
   }
 
@@ -339,7 +308,10 @@ export class SolicTurnosComponent {
   {
     this.spinner = true;
     let info = {dia: this.diaSel, fecha: this.fechaSel, horario: this.horarioSel};
-    let turnos = {info: info, especialista: this.especialistaSel, paciente: this.usuSel, estado: 'pendiente', detalle: '', marcaEncuesta: '', calificacion: ''};
+
+    let res = {diagnostico:"", var1:{prob:"", cant:""}, var2:{prob:"", cant:""}, var3:{prob:"", cant:""}, altura:"", peso:"", temperatura:"", presion:""}; 
+
+    let turnos = {info: info, especialista: this.especialistaSel, paciente: this.usuSel, estado: 'pendiente', resenia: res, marcaEncuesta: '', calificacion: ''};
 
     try 
     {
@@ -355,6 +327,7 @@ export class SolicTurnosComponent {
     } 
     finally
     {
+      this.tomados.push(turnos);
       this.horarioSel = '';
       this.diaSel = '';
       this.fechaSel = '';
@@ -378,19 +351,6 @@ export class SolicTurnosComponent {
     );
   }
 
-  // seleccionBoton($event:any, color:string)
-  // {
-  //   let array2 = document.getElementsByClassName(color);
-  //   let num2 = array2.length;
-  //   for (let index = 0; index < num2; index++) {
-  //     array2[0].classList.remove(color);
-  //   }
-
-  //   if($event != null){
-  //     $event.srcElement.classList.add(color);
-  //   }
-  // }
-
   seleccionBoton($event:any, color:string)
   {
     this.borrarColor(color);
@@ -406,50 +366,6 @@ export class SolicTurnosComponent {
       array2[0].classList.remove(color);
     } 
   }
-
-  seleccionBotonEsp($event:any)
-  {
-    let array2 = document.getElementsByClassName('verde');
-    let num2 = array2.length;
-    for (let index = 0; index < num2; index++) {
-      array2[0].classList.remove('verde');
-    }
-
-    if($event != null){
-      $event.srcElement.classList.add('verde');
-    }
-
-    let array = document.getElementsByClassName('rojo');
-    let num = array.length;
-    for (let index = 0; index < num; index++) {
-      array[0].classList.remove('rojo');
-    }
-  }
-
-  seleccionBotonDia($event:any)
-  {
-    let array2 = document.getElementsByClassName('violeta');
-    let num2 = array2.length;
-    for (let index = 0; index < num2; index++) {
-      array2[0].classList.remove('violeta');
-    }
-
-    if($event != null){
-      $event.srcElement.classList.add('violeta');
-    }
-
-    let array = document.getElementsByClassName('celeste');
-    let num = array.length;
-    for (let index = 0; index < num; index++) {
-      array[0].classList.remove('celeste');
-    }
-  }
-
-  // selPaciente(p:Paciente)
-  // {
-  //   this.usuSel = {nombre: p.nombre, apellido: p.apellido, mail: p.mail};
-  //   this.mostrarAdmin = true;
-  // }
 
   selPaciente($event:any,p:Paciente){
     this.horarioSel = '';

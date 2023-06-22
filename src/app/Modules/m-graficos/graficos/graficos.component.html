@@ -1,0 +1,60 @@
+<h2>Graficos</h2>
+<div>
+    <button (click)="this.log()">Log de Ingresos</button>
+    <button (click)="this.TxE()">Turnos x Especialidad</button>
+    <button (click)="this.TxD()">Turnos x Dia</button>
+    <button (click)="this.TxEyL()">Turnos x Esp y Lapso</button>
+    <button (click)="this.TfxEyL()">Turnos Finalizados x Esp y Lapso</button>
+</div>
+
+<ng-container *ngIf="this.grafico == 'log'">
+    <table id="log" class="table table-striped text-center">
+        <thead>
+            <tr>
+                <th>Usuario</th>
+                <th>Fecha</th>
+                <th>Horario</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let l of this.logs">
+                <td>{{l.usuario}}</td>
+                <td>{{l.fecha}}</td>
+                <td>{{l.horario}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <button (click)="this.generarPDF()">Generar PDF</button>
+</ng-container>
+
+<ng-container *ngIf="this.grafico == 'TxD'">
+    <highcharts-chart id="TxD"
+    [Highcharts]="this.Highcharts3"
+    [options]="this.chartOptions3"
+    style="width: 100%; height: 400px; display: block;"
+></highcharts-chart>
+<button (click)="this.generarPDF()"></button>
+</ng-container>
+
+
+<ng-container *ngIf="this.grafico == 'TxE'">
+    <highcharts-chart id="TxE"
+        [Highcharts]="Highcharts"
+        [options]="chartOptions"
+        style="width: 100%; height: 400px; display: block;"
+    ></highcharts-chart>
+    <button (click)="this.generarPDF()">Generar PDF</button>
+</ng-container>
+
+<ng-container *ngIf="this.grafico == 'TxEyL' ||  this.grafico == 'TfxEyL'">
+    <button (click)="this.setLapso(7)">Ultima Semana</button>
+    <button (click)="this.setLapso(15)">Ultima Quincena</button>
+        <ng-container *ngIf="this.mostrar == true">
+            <highcharts-chart id="TxEyL" 
+                [Highcharts]="this.Highcharts2"
+                [options]="this.chartOptions2"
+                style="width: 100%; height: 400px; display: block;"
+            ></highcharts-chart>
+            <button (click)="this.generarPDF()">Generar PDF</button>
+        </ng-container>
+</ng-container>

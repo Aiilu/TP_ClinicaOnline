@@ -1,0 +1,84 @@
+<ng-container *ngIf="(this.seleccion == 'cancelado' || this.seleccion == 'rechazado') else finalizar">
+    <input type="text" placeholder="ingrese motivo" [(ngModel)]="this.motivo">
+    <button (click)="salir()">Salir</button>
+    <button (click)="guardar()">Guardar</button>
+</ng-container>
+
+<ng-template #finalizar>
+    <form [formGroup]="formResenia" class="contenedor" (ngSubmit)="this.finalizarResenia()">
+        <label for="">Altura</label>
+        <input type="number" class="" id="altura" placeholder="Ingrese altura" formControlName="altura">
+        <small class="invalid" *ngIf="formResenia.controls['altura'].errors?.['required'] && formResenia.controls['altura'].touched">La altura es requerida</small>
+        <small class="invalid" *ngIf="formResenia.controls['altura'].errors?.['pattern'] && formResenia.controls['altura'].touched">La altura debe contener solo numeros</small>
+        <small class="invalid" *ngIf="formResenia.controls['altura'].errors?.['min'] && formResenia.controls['altura'].touched">La altura debe ser >= 1</small>
+
+        <label for="">Peso</label>
+        <input type="number" class="" id="peso" placeholder="Ingrese peso" formControlName="peso">
+        <small class="invalid" *ngIf="formResenia.controls['peso'].errors?.['required'] && formResenia.controls['peso'].touched">El peso es requerido</small>
+        <small class="invalid" *ngIf="formResenia.controls['peso'].errors?.['pattern'] && formResenia.controls['peso'].touched">El peso debe contener solo numeros</small>
+        <small class="invalid" *ngIf="formResenia.controls['peso'].errors?.['min'] && formResenia.controls['peso'].touched">El peso debe ser >= 1</small>
+
+        <label for="">Temperatura</label>
+        <input type="number" class="" id="temperatura" placeholder="Ingrese temperatura" formControlName="temperatura">
+        <small class="invalid" *ngIf="formResenia.controls['temperatura'].errors?.['required'] && formResenia.controls['temperatura'].touched">La temperatura es requerida</small>
+        <small class="invalid" *ngIf="formResenia.controls['temperatura'].errors?.['pattern'] && formResenia.controls['temperatura'].touched">La temperatura debe contener solo numeros</small>
+        <small class="invalid" *ngIf="formResenia.controls['temperatura'].errors?.['min'] && formResenia.controls['temperatura'].touched">La temperatura debe ser >= 1</small>
+
+        <label for="">Presion</label>
+        <input type="number" class="" id="presion" placeholder="Ingrese presion" formControlName="presion">
+        <small class="invalid" *ngIf="formResenia.controls['presion'].errors?.['required'] && formResenia.controls['presion'].touched">La presion es requerida</small>
+        <small class="invalid" *ngIf="formResenia.controls['presion'].errors?.['pattern'] && formResenia.controls['presion'].touched">La presion debe contener solo numeros</small>
+        <small class="invalid" *ngIf="formResenia.controls['presion'].errors?.['min'] && formResenia.controls['presion'].touched">La presion debe ser >= 1</small>
+
+        <label for="diagnostico" class="">Diagnostico</label>
+        <input type="text" class="" id="diagnostico" placeholder="Ingrese diagnostico" formControlName="diagnostico">
+        <small class="invalid" *ngIf="formResenia.controls['diagnostico'].errors?.['required'] && formResenia.controls['diagnostico'].touched">El diagnostico es requerido</small>
+        <small class="invalid" *ngIf="formResenia.controls['diagnostico'].errors?.['pattern'] && formResenia.controls['diagnostico'].touched">El diagnostico debe contener solo letras</small>
+        <small class="invalid" *ngIf="formResenia.controls['diagnostico'].errors?.['maxLength'] && formResenia.controls['diagnostico'].touched">El diagnostico debe ser > 10 y no debe estar vacio</small>
+
+        <div>
+            <div>
+                <label for="problemaUno" class="">1- Problematica</label>
+                <input type="text" class="" id="problemaUno" placeholder="Ingrese problema" formControlName="problemaUno">
+                <small class="invalid" *ngIf="formResenia.controls['problemaUno'].errors?.['pattern'] && formResenia.controls['problemaUno'].touched">El problema debe contener solo letras</small>
+            </div>
+            <div>
+                <label for="cantUno" class="">1- Cantidad</label>
+                <input type="number" class="" id="cantUno" placeholder="Ingrese cant" formControlName="cantUno">
+                <small class="invalid" *ngIf="formResenia.controls['cantUno'].errors?.['pattern'] && formResenia.controls['cantUno'].touched">La cantidad debe contener solo numeros</small>
+                <small class="invalid" *ngIf="formResenia.controls['cantUno'].errors?.['min'] && formResenia.controls['cantUno'].touched">La cantidad debe ser >= 1</small>
+            </div>
+        </div>
+
+        <div>
+            <div>
+                <label for="problemaDos" class="">2- Problematica</label>
+                <input type="text" class="" id="problemaDos" placeholder="Ingrese problema" formControlName="problemaDos">
+                <small class="invalid" *ngIf="formResenia.controls['problemaDos'].errors?.['pattern'] && formResenia.controls['problemaDos'].touched">El problema debe contener solo letras</small>
+            </div>
+            <div>
+                <label for="cantDos" class="">2- Cantidad</label>
+                <input type="number" class="" id="cantDos" placeholder="Ingrese cant" formControlName="cantDos">
+                <small class="invalid" *ngIf="formResenia.controls['cantDos'].errors?.['pattern'] && formResenia.controls['cantDos'].touched">La cantidad debe contener solo numeros</small>
+                <small class="invalid" *ngIf="formResenia.controls['cantDos'].errors?.['min'] && formResenia.controls['cantDos'].touched">La cantidad debe ser >= 1</small>
+            </div>
+        </div>
+
+        <div>
+            <div>
+                <label for="problemaTres" class="">3- Problematica</label>
+                <input type="text" class="" id="problemaTres" placeholder="Ingrese problema" formControlName="problemaTres">
+                <small class="invalid" *ngIf="formResenia.controls['problemaTres'].errors?.['pattern'] && formResenia.controls['problemaTres'].touched">El problema debe contener solo letras</small>
+            </div>
+            <div>
+                <label for="cantTres" class="">3- Cantidad</label>
+                <input type="number" class="" id="cantTres" placeholder="Ingrese cant" formControlName="cantTres">
+                <small class="invalid" *ngIf="formResenia.controls['cantTres'].errors?.['pattern'] && formResenia.controls['cantTres'].touched">La cantidad debe contener solo numeros</small>
+                <small class="invalid" *ngIf="formResenia.controls['cantTres'].errors?.['min'] && formResenia.controls['cantTres'].touched">La cantidad debe ser >= 1</small>
+            </div>
+        </div>
+
+        <button type="submit" [disabled]="formResenia.invalid">Aceptar</button>
+    </form>
+    <button (click)="salir()">Salir</button>
+</ng-template>

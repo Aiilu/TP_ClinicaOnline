@@ -5,11 +5,15 @@
 
         <!-- Icon -->
         <div class="fadeIn first">
-            <img src="../../../../assets/registrar.png" id="icon" alt="User Icon" style="width: 40px;" />
+            <img src="./assets/registrar.png" id="icon" alt="User Icon" style="width: 40px;" />
         </div>
         <br>
-        <button id="btnVista" (click)="cambiarVista('paciente')">Paciente</button>
-        <button id="btnVista" (click)="cambiarVista('especialista')">Especialista</button>
+        <div>
+            <button id="btnVista" (click)="cambiarVista('paciente')" class="foto foto2" [ngStyle]="{'background-image':'url(./assets/paciente.png)'}"></button>
+        </div>
+        <div>
+            <button id="btnVista" (click)="cambiarVista('especialista')" class="foto" [ngStyle]="{'background-image':'url(./assets/dotora.jpg)'}"></button>
+        </div>
 
         <div [ngSwitch]="this.vista">
             <div *ngSwitchCase="'paciente'">
