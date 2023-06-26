@@ -1,39 +1,39 @@
 <div class="container-fluid bg-dark flexHeader">
-    <h4 class="text-white"><a class="text-white" routerLink="home">Clinica - Torrez</a></h4>
+    <h4 class="text-white"><a class="text-white" appDirectivaDos routerLink="home">Clinica - Torrez</a></h4>
     <nav>
         <ul class="list-unstyled list-inline">
             <li class="list-inline-item p-3" *ngIf="this.usu?.mail">
                 <p class="text-white">{{this.usu?.mail}}</p>
             </li>
             <li class="list-inline-item p-3" *ngIf="!this.usu?.mail">
-                <a class="text-white" routerLink="login">Ingresar</a>
+                <a class="text-white" appDirectivaDos routerLink="login">Ingresar</a>
             </li>
             <li class="list-inline-item p-3" *ngIf="!this.usu?.mail">
-                <a class="text-white" routerLink="registro">Registrarse</a>
+                <a class="text-white" appDirectivaDos routerLink="registro">Registrarse</a>
             </li>
             <li class="list-inline-item p-3" *ngIf="this.usu?.perfil == 'administrador'">
-                <a class="text-white" routerLink="usuarios">Usuarios</a>
+                <a class="text-white" appDirectivaDos routerLink="usuarios">Usuarios</a>
             </li>
             <li class="list-inline-item p-3" *ngIf="(this.usu?.perfil == 'especialista') || (this.usu?.perfil == 'paciente')">
-                <a class="text-white" routerLink="misTurnos">Mis Turnos</a>
+                <a class="text-white" appDirectivaDos routerLink="misTurnos" appDirectivaDos>Mis Turnos</a>
             </li>
             <li class="list-inline-item p-3" *ngIf="this.usu?.perfil == 'administrador'">
-                <a class="text-white" routerLink="turnos">Turnos</a>
+                <a class="text-white" appDirectivaDos routerLink="turnos">Turnos</a>
             </li>
             <li class="list-inline-item p-3" *ngIf="this.usu?.mail">
-                <a class="text-white" routerLink="perfil">Perfil</a>
+                <a class="text-white" appDirectivaDos routerLink="perfil">Perfil</a>
             </li>
             <li class="list-inline-item p-3" *ngIf="(this.usu?.perfil == 'administrador') || (this.usu?.perfil == 'paciente')">
-                <a class="text-white" routerLink="solTur">Solicitar Turnos</a>
+                <a class="text-white" appDirectivaDos routerLink="solTur">Solicitar Turnos</a>
             </li>
             <li class="list-inline-item p-3" *ngIf="this.usu?.perfil == 'especialista'">
-                <a class="text-white" routerLink="pacientes">Pacientes</a>
+                <a class="text-white" appDirectivaDos routerLink="pacientes">Pacientes</a>
             </li>
             <li class="list-inline-item p-3" *ngIf="this.usu?.perfil == 'administrador'">
-                <a class="text-white" routerLink="graficos">Graficos</a>
+                <a class="text-white" appDirectivaDos routerLink="graficos">Graficos</a>
             </li>
             <li class="list-inline-item p-3" *ngIf="this.usu?.mail">
-                <a class="text-white" routerLink="home" (click)="this.salir()">Salir</a>
+                <a class="text-white" appDirectivaDos routerLink="home" (click)="this.salir()">Salir</a>
             </li>
         </ul>
     </nav>

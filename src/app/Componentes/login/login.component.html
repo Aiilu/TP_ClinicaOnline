@@ -12,7 +12,7 @@
       <form [formGroup]="formLogin" (ngSubmit)="this.ingresar()">
                     <label for="emailR">Mail:</label>
                     <br>
-                    <input type="text" id="emailR" class="fadeIn second" name="registroEmail" placeholder="Ingrese mail" formControlName="emailR">
+                    <input type="text" id="emailR" class="fadeIn second" name="registroEmail" placeholder="Ingrese mail" formControlName="emailR" appDirectivaTres>
                     <br>
                     <small class="invalid" *ngIf="formLogin.controls['emailR'].errors?.['required'] && formLogin.controls['emailR'].touched">El email es requerido</small>
                     <small class="invalid" *ngIf="formLogin.controls['emailR'].errors?.['email'] && formLogin.controls['emailR'].touched">El email debe tener el formato correspondiente</small>

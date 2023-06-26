@@ -288,4 +288,20 @@ html {
   .invalid {
     color: red;
   }
+
+  .redondos{
+    border-radius: 50%;
+    width: 5em;
+    height: 5em;
+    margin: .7em;
+    font-weight: 600;
+    background-size: cover;
+    text-shadow: white -.05em -.05em;
+    color: red;
+}
+
+.alinear{
+  display: flex;
+  justify-content: center;
+}
   

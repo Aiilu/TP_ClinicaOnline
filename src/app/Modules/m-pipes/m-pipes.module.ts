@@ -1,19 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FechaPipe } from './fecha.pipe';
+import { DniPipe } from './dni.pipe';
 
 
 
 @NgModule({
   declarations: [
-    FechaPipe
+    FechaPipe,
+    DniPipe
   ],
   imports: [
     CommonModule
   ],
   exports:
   [
-    FechaPipe
+    FechaPipe,
+    DniPipe
   ]
 })
 export class MPipesModule { }

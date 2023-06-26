@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ComentarioComponent } from './comentario/comentario.component';
 import { EncuestaComponent } from './encuesta/encuesta.component';
 import { MPipesModule } from '../m-pipes/m-pipes.module';
+import { MDirectivasModule } from '../m-directivas/m-directivas.module';
 
 
 
@@ -20,7 +21,8 @@ import { MPipesModule } from '../m-pipes/m-pipes.module';
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
-    MPipesModule
+    MPipesModule,
+    MDirectivasModule
   ],
   exports: [
     FiltradoComponent

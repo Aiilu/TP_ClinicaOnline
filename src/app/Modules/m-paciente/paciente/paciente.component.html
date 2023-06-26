@@ -2,7 +2,7 @@
     <h3>Pacientes:</h3>
     <br>
     <ng-container *ngIf="!this.spinner else spinnerI">
-        <table class="table table-striped text-center" *ngIf="this.pacientes.length != 0 else vacio">
+        <!-- <table class="table table-striped text-center" *ngIf="this.pacientes.length != 0 else vacio">
             <thead>
                 <tr>
                     <th>Nombre</th>
@@ -17,7 +17,10 @@
                     <td><button (click)="this.abrir(p.mail)">Ver</button></td>
                 </tr>
             </tbody>
-        </table>
+        </table> -->
+        <ng-container *ngIf="this.pacientes.length != 0 else vacio">
+            <button *ngFor="let p of this.pacientes" (click)="this.abrir(p.mail)" [ngStyle]="{'background-image':'url(' + p.foto + ')'}" class="redondos">{{p.nombre}} {{p.apellido}}</button>
+        </ng-container>
     </ng-container>
 
     <ng-template #spinnerI>

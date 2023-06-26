@@ -1,40 +1,48 @@
-
-
-<ng-container *ngIf="this.histClinico != null else vacio">
-    <div id="imprimir">
-        <div class="titulo1">
-            <img src="./favicon.ico" alt="Logo" class="logo">
-            <small class="fecha"> {{this.fecha}} </small>    
-        </div>
-        <div class="titulo2">
-            <h2>Historial clinico </h2>
-            <h6> Clinica - Torrez </h6>
-        </div>
-        <br>
-
-        <p>Paciente: {{this.histClinico.paciente.nombre}} {{this.histClinico.paciente.apellido}}</p>
-        <p>Altura: {{this.histClinico.altura}}</p>
-        <p>Peso: {{this.histClinico.peso}}</p>
-        <p>Presion: {{this.histClinico.presion}}</p>
-        <p>Temperatura: {{this.histClinico.temperatura}}</p>
-        <br>
-        <ng-container *ngFor="let r of this.histClinico.resenias; let i=index">
-            <p>Reseña {{i+1}}:</p>
-            <p>Fecha: {{r.fecha | fecha}}</p>
-            <p>Especialista: {{r.especialista.nombre}} {{r.especialista.apellido}} - {{r.especialista.especialidad}}</p>
-            <p *ngIf="r.var1.prob != ''">{{r.var1.prob}}: {{r.var1.cant}}</p>
-            <p *ngIf="r.var2.prob != ''">{{r.var2.prob}}: {{r.var2.cant}}</p>
-            <p *ngIf="r.var3.prob != ''">{{r.var3.prob}}: {{r.var3.cant}}</p>
-            <p>Diagnostico: {{r.diagnostico}}</p>
+<!-- <div [@animacion]="this.estado"> -->
+    <ng-container *ngIf="this.histClinico != null else vacio">
+        <div id="imprimir">
+            <div class="titulo1">
+                <img src="./favicon.ico" alt="Logo" class="logo">
+                <small class="fecha"> {{this.fecha}} </small>    
+            </div>
+            <div class="titulo2">
+                <h2>Historial clinico </h2>
+                <h6> Clinica - Torrez </h6>
+            </div>
             <br>
+    
+            <p>Paciente: {{this.histClinico.paciente.nombre}} {{this.histClinico.paciente.apellido}}</p>
+            <p>Altura: {{this.histClinico.altura}}</p>
+            <p>Peso: {{this.histClinico.peso}}</p>
+            <p>Presion: {{this.histClinico.presion}}</p>
+            <p>Temperatura: {{this.histClinico.temperatura}}</p>
+            <br>
+            <!-- <ng-container *ngFor="let r of this.histClinico.resenias; let i=index"> -->
+            <ng-container *ngFor="let r of this.resenias; let i=index">
+                <p>Reseña {{i+1}}:</p>
+                <p>Fecha: {{r.fecha | fecha}}</p>
+                <p>Especialista: {{r.especialista.nombre}} {{r.especialista.apellido}} - {{r.especialista.especialidad}}</p>
+                <p *ngIf="r.var1.prob != ''">{{r.var1.prob}}: {{r.var1.cant}}</p>
+                <p *ngIf="r.var2.prob != ''">{{r.var2.prob}}: {{r.var2.cant}}</p>
+                <p *ngIf="r.var3.prob != ''">{{r.var3.prob}}: {{r.var3.cant}}</p>
+                <p>Diagnostico: {{r.diagnostico}}</p>
+                <br>
+            </ng-container>
+        </div>
+
+        <ng-container *ngIf="this.mailU == this.mailP">
+            <h6>Filtrar por Especialista:</h6>
+            <button *ngFor="let e of (this.esp)" (click)="this.filtrar(e.mail)">{{e.nombre}} {{e.apellido}}</button>
+            <br>
+            <br>
+            <button (click)="this.generarPDF()">Generar PDF</button>
         </ng-container>
-    </div>
-    <button *ngIf="this.mailU == this.mailP" (click)="this.generarPDF()">Generar PDF</button>
-</ng-container>
-
-
-<ng-template #vacio>
-    <h4>Este paciente aun no tiene historial clinico</h4>
-</ng-template>
-
-<button (click)="this.salir()">Salir</button>
+    </ng-container>
+    
+    
+    <ng-template #vacio>
+        <h4>Este paciente aun no tiene historial clinico</h4>
+    </ng-template>
+    
+    <button (click)="this.salir()">Salir</button>
+<!-- </div> -->

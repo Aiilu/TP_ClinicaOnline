@@ -14,6 +14,8 @@ import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { provideStorage,getStorage } from '@angular/fire/storage';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MDirectivasModule } from './Modules/m-directivas/m-directivas.module';
 // import { HighchartsChartModule } from 'highcharts-angular';
 
 @NgModule({
@@ -33,7 +35,9 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
     provideAuth(() => getAuth()),
     AngularFireAuthModule,
     ReactiveFormsModule,
-    provideStorage(() => getStorage())
+    provideStorage(() => getStorage()),
+    BrowserAnimationsModule,
+    MDirectivasModule
   ],
   providers: [{ provide: FIREBASE_OPTIONS, useValue: environment.firebase }],
   bootstrap: [AppComponent]

@@ -11,9 +11,9 @@ export class PacienteComponent {
   pacientes:any[] = [];
   mailP:string = '';
   spinner = false;
+  fotoP:string = "";
 
-  constructor(private servBase:BaseDatosService){
-  }
+  constructor(private servBase:BaseDatosService){}
 
   ngOnInit(){
     this.spinner = true;
@@ -23,10 +23,13 @@ export class PacienteComponent {
         this.servBase.traerFiltrado('Turnos', 'especialista.mail', a?.email).then(
           (turnos:any[])=>{
             turnos.forEach(
-              (turno:any) => {
+              async (turno:any) => {
                 if(turno.estado == 'finalizado'){
                   // this.servBase.traerFiltrado('Usuarios', 'mail',turno.paciente.mail);
-                  let paciente = {nombre:turno.paciente.nombre,apellido:turno.paciente.apellido,mail:turno.paciente.mail};
+                  // let paciente = {nombre:turno.paciente.nombre,apellido:turno.paciente.apellido,mail:turno.paciente.mail};
+                  await this.servBase.traerUsu("Usuarios", turno.paciente.mail).then((b:any)=>{this.fotoP = b[0].foto});
+                  let paciente = {nombre:turno.paciente.nombre, apellido:turno.paciente.apellido, mail:turno.paciente.mail, foto:this.fotoP};
+                  this.fotoP = "";
                   let existe = false;
                   this.pacientes.forEach(
                     (p:any)=>{

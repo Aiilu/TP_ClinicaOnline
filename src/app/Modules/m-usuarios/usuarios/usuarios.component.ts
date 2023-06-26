@@ -5,6 +5,8 @@ import { Subscription } from 'rxjs';
 import { Persona } from 'src/app/Clases/persona';
 import { BaseDatosService } from 'src/app/Servicios/base-datos.service';
 import Swal from 'sweetalert2';
+import { Workbook } from 'exceljs';
+import * as fs from 'file-saver';
 
 @Component({
   selector: 'app-usuarios',
@@ -23,6 +25,8 @@ export class UsuariosComponent {
   spinner:boolean = false;
   modal:boolean = false;
   mailP:string = "";
+  histClinico:any = null;
+  work!:Workbook;
 
   constructor(private fb: FormBuilder, private servBase:BaseDatosService, private router:Router){
     this.formAdmin = this.fb.group({
@@ -188,4 +192,100 @@ export class UsuariosComponent {
     this.modal = false;
     this.mailP = "";
   }
+
+  async descargarExcel(paciente:any)
+  {
+    await this.servBase.traerFiltrado("HistClinico", "paciente.mail", paciente.mail)
+    .then((h)=>
+    {
+      if(h.length != 0)
+      {
+        this.histClinico = h[0];
+      }
+    })
+    .catch((error)=>
+    {
+      console.log(error);
+    }
+   );
+
+   if(this.histClinico == null)
+   {
+    Swal.fire(
+      paciente.nombre + ' no tiene hist. clinico!',
+      'Haga click para continuar',
+      'error'
+    );
+   }
+   else
+   {
+    let nombre = "Turnos - " + paciente.nombre + " " + paciente.apellido + ".xlsx";
+    this.work = new Workbook();
+ 
+    this.crearTabla();
+ 
+    this.work.xlsx.writeBuffer().then(
+      (data)=>
+      {
+        const blob = new Blob([data]);
+        fs.saveAs(blob, nombre);
+      }
+    );
+   }
+
+   this.histClinico = null;
+ }
+
+ crearTabla()
+{
+  //creamos la hoja excel, si no da error al abrir y nos devuelve la instancia de la hoa creada
+  const sheet = this.work.addWorksheet("Turnos");
+  //en base a la hoja, accedemos a las distintas columnas. El INDICE arranca en 1 o podes usar las letras de las celdas. PODEMOS AGREGARLE ESTILOS A ESA COLUMNA
+  sheet.getColumn('B').width = 20;
+  sheet.getColumn('C').width = 20;
+  sheet.getColumn('D').width = 20;
+
+  //ahora alineas el texto que esta dentro de las columnas, de esta forma, el estilo aplica para TODAS las columnas.
+  sheet.columns.forEach((colum)=>
+  {
+    //con esto le decimos que vamos a darle una alineacion
+    colum.alignment = {vertical:'middle', wrapText:true};
+  });
+
+  //accedemos a una celda en especifico, al cual le podemos dar un valor y aplicar estilos
+  const tittle = sheet.getCell('E2');
+  tittle.value = "Turnos de " + this.histClinico.paciente.nombre + " " + this.histClinico.paciente.apellido;
+  tittle.style.font = {bold:true, size:24};
+
+  //accedemos A UNA ROW y le insertamos los titulos
+  const header = sheet.getRow(4);
+  //con value podes establecer un titulo en la posicion, pero tambien podes acceder a values e ir insertando valores sg el orden de esa fila. Internamente estas ingresando las columnas A, B, C, etc. Los objetos son la representacion de cada columna
+  header.values = ['', 'Fecha', 'Especialidad', 'Especialista'];
+  header.font = {bold:true, size:14};
+
+  //aca le decimos que me traiga una determinada cant de filas, que arranque en el 15 hasta la cantidad que necesito para mostrar todo el array.
+  const rowsToInsert = sheet.getRows(5, this.histClinico.resenias.length)!; 
+
+  //vamos a recorrerer cada una de las filas
+  for (let index = 0; index < rowsToInsert.length; index++) {
+    //nos guardamos la data del array
+    const itemData = this.histClinico.resenias[index];
+    //y nos guardamos el indice de la row
+    const row2 = rowsToInsert[index];
+
+    let fechaS = itemData.fecha.toString();
+    let fechaF = fechaS.slice(6,8) + '/' + fechaS.slice(4,6) + '/' + fechaS.slice(2,4); 
+
+    //aca seteamos los elementos de esa row
+    row2.values = [
+      '',
+      fechaF,
+      itemData.especialista.especialidad,
+      itemData.especialista.nombre + ' ' + itemData.especialista.apellido
+    ];
+
+    row2.height = 40;
+    row2.alignment = {horizontal: "left", wrapText:true};
+  }
+ }
 }

@@ -5,7 +5,7 @@
         <p>Nombre: {{this.usu?.nombre}}</p>
         <p>Apellido: {{this.usu?.apellido}}</p>
         <p>Edad: {{this.usu?.edad}}</p>
-        <p>DNI: {{this.usu?.dni}}</p>
+        <p>DNI: {{this.usu?.dni | dni}}</p>
 
         <div [ngSwitch]="this.usu?.perfil">
             <div *ngSwitchCase="'paciente'">

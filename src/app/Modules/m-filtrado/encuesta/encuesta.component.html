@@ -1,14 +1,16 @@
 <ng-container *ngIf="this.seleccionE == 'resenia'">
-    <p>Diagnostico: {{this.turnoE.resenia.diagnostico}}</p>
-    <p>Altura: {{this.turnoE.resenia.altura}}</p>
-    <p>Peso: {{this.turnoE.resenia.peso}}</p>
-    <p>Presion: {{this.turnoE.resenia.presion}}</p>
-    <p>Temperatura: {{this.turnoE.resenia.temperatura}}</p>
-    <p *ngIf="this.turnoE.resenia.var1.prob != ''">{{this.turnoE.resenia.var1.prob}}: {{this.turnoE.resenia.var1.cant}}</p>
-    <p *ngIf="this.turnoE.resenia.var2.prob != ''">{{this.turnoE.resenia.var2.prob}}: {{this.turnoE.resenia.var2.cant}}</p>
-    <p *ngIf="this.turnoE.resenia.var3.prob != ''">{{this.turnoE.resenia.var3.prob}}: {{this.turnoE.resenia.var3.cant}}</p>
-    <br>
-    <button (click)="this.salir()">Salir</button>
+    <div>
+        <p>Diagnostico: {{this.turnoE.resenia.diagnostico}}</p>
+        <p>Altura: {{this.turnoE.resenia.altura}}</p>
+        <p>Peso: {{this.turnoE.resenia.peso}}</p>
+        <p>Presion: {{this.turnoE.resenia.presion}}</p>
+        <p>Temperatura: {{this.turnoE.resenia.temperatura}}</p>
+        <p *ngIf="this.turnoE.resenia.var1.prob != ''">{{this.turnoE.resenia.var1.prob}}: {{this.turnoE.resenia.var1.cant}}</p>
+        <p *ngIf="this.turnoE.resenia.var2.prob != ''">{{this.turnoE.resenia.var2.prob}}: {{this.turnoE.resenia.var2.cant}}</p>
+        <p *ngIf="this.turnoE.resenia.var3.prob != ''">{{this.turnoE.resenia.var3.prob}}: {{this.turnoE.resenia.var3.cant}}</p>
+        <br>
+        <button (click)="this.salir()">Salir</button>
+    </div>
 </ng-container>
 
 <ng-container *ngIf="this.seleccionE == 'encuesta'">

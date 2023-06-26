@@ -1,6 +1,6 @@
 .contenedor{
     margin-top: 1em;
-    background-color: aqua;
+    /* background-color: aqua; */
 }
 
 .perfil__imagen{
@@ -9,7 +9,9 @@
 }
 
 .contenedor__horarios{
-    background-color: blueviolet;
+    /* background-color: blueviolet; */
+    background-color: transparent;
+
 }
 
 .rojo{
