@@ -1,27 +1,44 @@
 # TPClinica
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.4.
+La Clínica Online, especialista en salud, cuenta actualmente con consultorios (6 en la actualidad),
+dos laboratorios (físicos en la clínica), y una sala de espera general. Está abierta al público de Lunes a
+Viernes en el horario de 8:00 a 19:00, y los Sábados en el horario de 8:00 a 14:00. 
+Esta pagina permite la administracion de turnos por parte del Paciente, Especialista y Administrador.
 
-## Development server
+## Pantallas
+### Home
+![ImgHome](home.PNG)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### Ingresar
+![ImgLogin](login.PNG)
 
-## Code scaffolding
+### Registrarse
+![ImgRegistro](registro.PNG)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Usuarios
+![ImgUsuarios](Usuarios.PNG)
 
-## Build
+### Turnos
+![ImgTurnos](turnos.PNG)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Perfil
+![ImgPerfil](Perfil.PNG)
 
-## Running unit tests
+### Solicitar Turnos
+![ImgSolicTurnos](solicitarTurnos.PNG)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Graficos
+![ImgGraficos](graficos.PNG)
 
-## Running end-to-end tests
+### Mis Turnos
+![ImgMisTurnos](misTurnos.PNG)
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### Pacientes
+![ImgPacientes1](Pacientes1.PNG)
+![ImgPacientes2](Pacientes2.PNG)
 
-## Further help
+## Usuario - Paciente
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Usuario - Especialista
+
+## Usuario - Administrador
