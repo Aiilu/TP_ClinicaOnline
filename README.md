@@ -7,35 +7,35 @@ Esta pagina permite la administracion de turnos por parte del Paciente, Especial
 
 ## Pantallas
 ### Home
-![ImgHome](home.PNG)
+![ImgHome](./ImgReadme/home.PNG)
 
 ### Ingresar
-![ImgLogin](login.PNG)
+![ImgLogin](./ImgReadme/login.PNG)
 
 ### Registrarse
-![ImgRegistro](registro.PNG)
+![ImgRegistro](./ImgReadme/registro.PNG)
 
 ### Usuarios
-![ImgUsuarios](Usuarios.PNG)
+![ImgUsuarios](./ImgReadme/Usuarios.PNG)
 
 ### Turnos
-![ImgTurnos](turnos.PNG)
+![ImgTurnos](./ImgReadme/turnos.PNG)
 
 ### Perfil
-![ImgPerfil](Perfil.PNG)
+![ImgPerfil](./ImgReadme/Perfil.PNG)
 
 ### Solicitar Turnos
-![ImgSolicTurnos](solicitarTurnos.PNG)
+![ImgSolicTurnos](./ImgReadme/solicitarTurnos.PNG)
 
 ### Graficos
-![ImgGraficos](graficos.PNG)
+![ImgGraficos](./ImgReadme/graficos.PNG)
 
 ### Mis Turnos
-![ImgMisTurnos](misTurnos.PNG)
+![ImgMisTurnos](./ImgReadme/misTurnos.PNG)
 
 ### Pacientes
-![ImgPacientes1](Pacientes1.PNG)
-![ImgPacientes2](Pacientes2.PNG)
+![ImgPacientes1](./ImgReadme/Pacientes1.PNG)
+![ImgPacientes2](./ImgReadme/Pacientes2.PNG)
 
 ## Usuario - Paciente
 
