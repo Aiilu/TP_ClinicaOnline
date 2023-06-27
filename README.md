@@ -64,7 +64,7 @@ Tambien al finalizar un turno debe llenar un formulario con el diagnostico y las
 Tiene un filtro que le permite buscar por cualquier campo del Turno.
 
 Perfil:
-En esta seccion el especialista ve sus datos personales y puede asiganr sus horarios de trabajo para cada una de sus especialidades.
+En esta seccion el especialista ve sus datos personales y puede asignar sus horarios de trabajo para cada una de sus especialidades.
 
 Pacientes:
 En esta seccion el especialista puede elegir un paciente (el cual debe haberse atendido con el minimo 1 vez) y acceder a su historial clinico.
@@ -75,7 +75,7 @@ El Administrador puede acceder a...
  
 Usuarios: 
 En esta seccion el administrador puede registrar a un administrador o acceder al listado de Usuarios (Paciente/Especialista).
-En el listado de Especialista tiene la opcion de habilitar/inhabilitar al mismo y en el de Pacientes puede elegir a uno y descargar en un EXCEL que turnos tuvo y con quien.
+En el listado de Especialistas tiene la opcion de habilitar/inhabilitar al mismo y en el de Pacientes puede elegir a uno y descargar en un EXCEL que turnos tuvo y con quien.
 
 Turnos:
 En esta seccion el administrador puede ver todos los turnos de la Clinica y cancelar los mismos, dejando un comentario del motivo.
@@ -88,4 +88,4 @@ Solicitar Turnos:
 En esta seccion el administrador puede solicitarle un turno a cualquier de los pacientes de la clinica. Al elegir el paciente se le habilita el elegir la especialidad, especialista y horario del turno.
 
 Graficos:
-En esta seccion el administrador puede ver el Log de Ingresos, y graficos que reflejan Turnos por Especialidad, Turnos por Dia, Turnos por Especialidad en un lapso de tiempo y Turnos por Especialidad Finalizados en un lapso de tiempo.
+En esta seccion el administrador puede ver el Log de Ingresos, y graficos que reflejan Turnos por Especialidad, Turnos por Dia, Turnos por Especialidad en un lapso de tiempo y Turnos por Especialidad Finalizados en un lapso de tiempo. Todos pueden descargarse en PDF.
