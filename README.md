@@ -43,6 +43,7 @@ Esta seccion permite que el usuario se registre en la pagina. Los formularios de
 ## Usuario - Paciente
 ![ImgMenuPaciente](./ImgReadme/menuPaciente.PNG)
 El Paciente puede acceder a...
+ 
 Mis Turnos: 
 En esta seccion el paciente ve todos sus turnos, los cuales puede cancelar en caso de ser necesario dejando un comentario del motivo. Tambien, al finalizar el mismo se le da la opcion de calificar la atencion del especialista y de ver la reseña del turno.
 Tiene un filtro que le permite buscar por cualquier campo del Turno.
@@ -56,6 +57,7 @@ En esta seccion el paciente puede solicitar turnos medicos. Debe seleccionar alg
 ## Usuario - Especialista
 ![ImgMenuEsp](./ImgReadme/menuEspecialista.PNG)
 El Especialista puede acceder a...
+ 
 Mis Turnos: 
 En esta seccion el especialista ve todos los turnos que tiene asignado, los cuales puede cancelar/rechazar/aceptar/finalizar dependiendo la ocasion. 
 Tambien al finalizar un turno debe llenar un formulario con el diagnostico y las variables fijas/dinamicas, y en caso de cancelar/rechazar debe dejar un comentario del motivo.
@@ -70,6 +72,7 @@ En esta seccion el especialista puede elegir un paciente (el cual debe haberse a
 ## Usuario - Administrador
 ![ImgMenuAdmin](./ImgReadme/menuAdministrador.PNG)
 El Administrador puede acceder a...
+ 
 Usuarios: 
 En esta seccion el administrador puede registrar a un administrador o acceder al listado de Usuarios (Paciente/Especialista).
 En el listado de Especialista tiene la opcion de habilitar/inhabilitar al mismo y en el de Pacientes puede elegir a uno y descargar en un EXCEL que turnos tuvo y con quien.
